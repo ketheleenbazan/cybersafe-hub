@@ -7,8 +7,8 @@ CyberSafe Hub is an interactive cybersecurity awareness website designed for non
 ## 🚀 Live Demo
 
 You can view and share the site using **GitHub Pages**:  
-`https://YOUR-USERNAME.github.io/cybersafe-hub/`  
-*(Replace `YOUR-USERNAME` with your actual GitHub username after deployment.)*
+https://github.com/ketheleenbazan/cybersafe-hub 
+
 
 ---
 
