@@ -1,0 +1,197 @@
+:root {
+    --main-bg: #0F172A;
+    --card-bg: #1E293B;
+    --primary-btn: #38BDF8;
+    --btn-hover: #67E8F9;
+    --heading: #34D399;
+    --text: #E2E8F0;
+    --score-red: #FF6B6B;
+    --score-yellow: #FACC15;
+    --score-green: #34D399;
+}
+
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--main-bg);
+    color: var(--text);
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--main-bg);
+    color: var(--text);
+}
+
+main {
+    flex: 1;
+    max-width: 800px;
+    margin: 2em auto;
+    background: var(--card-bg);
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header, footer {
+    background: var(--card-bg);
+    color: var(--text);
+    text-align: center;
+    padding: 1em 0;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+.feature-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.feature-btn {
+    display: inline-block;
+    padding: 1em 2em;
+    background: var(--primary-btn);
+    color: var(--main-bg);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+    border: none;
+}
+
+.feature-btn:hover {
+    background: var(--btn-hover);
+    color: var(--main-bg);
+}
+
+.answer-btn {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0;
+    padding: 1em;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary-btn);
+    color: var(--main-bg);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+}
+
+.answer-btn:hover:enabled {
+    background: var(--btn-hover);
+    color: var(--main-bg);
+}
+
+.answer-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#next-btn, #prev-btn, #restart-btn {
+    background: var(--primary-btn);
+    color: var(--main-bg);
+    border: none;
+    border-radius: 5px;
+    padding: 0.7em 1.5em;
+    font-size: 1em;
+    margin: 1em 0.5em 0 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+#next-btn:disabled {
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#next-btn:hover:enabled, #prev-btn:hover:enabled, #restart-btn:hover {
+    background: var(--btn-hover);
+    color: var(--main-bg);
+}
+
+#feedback span[style*="color:green"] {
+    color: var(--heading) !important;
+    font-weight: bold;
+}
+
+#feedback span[style*="color:red"] {
+    color: #FF6B6B !important;
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    color: var(--heading);
+}
+
+/* PHISHING GAME STYLES */
+
+.phishing-email-card {
+    background: #fff;
+    color: #222;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.phishing-email-header {
+    background: #fff;
+    color: #222;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.phishing-email-body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #222;
+    background: #f8fafc;
+    border-radius: 4px;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+/* Place phishing game buttons outside the email card */
+.phishing-game-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.phishing-btn {
+    background: var(--primary-btn, #38BDF8);
+    color: var(--main-bg, #0F172A);
+    border: none;
+    border-radius: 5px;
+    padding: 0.7em 1.5em;
+    font-size: 1em;
+    margin: 0 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.phishing-btn:hover:enabled {
+    background: var(--btn-hover, #67E8F9);
+    color: var(--main-bg, #0F172A);
+}
