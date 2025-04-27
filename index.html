@@ -2,27 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberSafe Hub</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <header>
-        <h1>CyberSafe Hub</h1>
-        <p>Your interactive guide to cybersecurity awareness</p>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="index.html" class="site-title">CyberSafe Hub</a>
+            </div>
+            <ul class="navbar-menu">
+                <li><a class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="password.html">Password Checker</a></li>
+                <li><a href="phishing.html">Phishing Awareness</a></li>
+                <li><a href="quiz.html">Quiz Game</a></li>
+            </ul>
+        </nav>
+        <!-- No breadcrumb on index -->
     </header>
+    <img src="static/images/banner.png" alt="CyberSafe Hub Banner" class="banner-img">
     <main>
         <h2>Welcome to CyberSafe Hub!</h2>
         <p>
             This site is designed for absolute beginners. Learn how to stay safe online with easy tools and guides.
         </p>
         <div class="feature-links">
-            <a href="password.html" class="feature-btn">Password Strength Checker</a>
-            <a href="phishing.html" class="feature-btn">Phishing Awareness</a>
-            <a href="quiz.html" class="feature-btn">Cybersecurity Quiz Game</a>
+            <a href="password.html" class="feature-btn">
+                <img src="static/images/password.jpg" alt="Password Strength Checker" class="topic-img" style="max-width:60px;vertical-align:middle;margin-right:1em;">
+                Password Strength Checker
+            </a>
+            <a href="phishing.html" class="feature-btn">
+                <img src="static/images/phishing.jpg" alt="Phishing Awareness" class="topic-img" style="max-width:60px;vertical-align:middle;margin-right:1em;">
+                Phishing Awareness
+            </a>
+            <a href="quiz.html" class="feature-btn">
+                <img src="static/images/quiz.jpg" alt="Cybersecurity Quiz Game" class="topic-img" style="max-width:60px;vertical-align:middle;margin-right:1em;">
+                Cybersecurity Quiz Game
+            </a>
         </div>
     </main>
-    
     <footer>
         <p>&copy; 2025 CyberSafe Hub</p>
     </footer>

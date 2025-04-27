@@ -6,22 +6,30 @@ CyberSafe Hub is an interactive cybersecurity awareness website designed for non
 
 ## 🚀 Live Demo
 
-You can view and share the site using **GitHub Pages**:  
-https://github.com/ketheleenbazan/cybersafe-hub 
-
+View and share the site using **GitHub Pages**:  
+https://ketheleenbazan.github.io/cybersafe-hub/
 
 ---
 
 ## Features
 
 - **Password Strength Checker:**  
-  Instantly check the strength of your password and receive tips to make it stronger.
+  - Clear instructions for creating strong passwords.
+  - Input field and "Check Password" button.
+  - Real-time, color-coded feedback and suggestions for improvement.
+  - Detects common patterns and provides actionable tips.
 
 - **Phishing Awareness Game:**  
-  Practice spotting phishing emails with realistic, interactive examples and instant feedback.
+  - Practice spotting phishing emails with 30+ realistic, interactive examples.
+  - Each game session presents 5 random emails.
+  - Mimics real email formatting for authenticity.
+  - Instant feedback and explanations for each answer.
 
 - **Cybersecurity Quiz Game:**  
-  Test your knowledge with a fun, beginner-friendly quiz. Each game presents 5 random questions from a pool of 40+, with instant feedback and the option to play again for new questions.
+  - Test your knowledge with a fun, beginner-friendly quiz.
+  - Each game presents 5 random questions from a pool of 40+.
+  - Previous/Next navigation, answer changing, and color-coded score feedback.
+  - Play again for new random questions.
 
 ---
 
@@ -52,7 +60,7 @@ https://github.com/ketheleenbazan/cybersafe-hub
 ## Tech Stack
 
 - HTML
-- CSS
+- CSS (custom palette: navy, teal, green, yellow, red, white)
 - JavaScript
 
 ---

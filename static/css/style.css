@@ -11,7 +11,7 @@
 }
 
 html, body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: var(--main-bg);
@@ -41,7 +41,18 @@ header, footer {
     background: var(--card-bg);
     color: var(--text);
     text-align: center;
-    padding: 1em 0;
+    padding: 0.5em 0;
+    margin: 0;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0.2em 0 0.1em 0;
+}
+
+header p {
+    font-size: 1rem;
+    margin: 0 0 0.2em 0;
 }
 
 section {
@@ -194,4 +205,191 @@ h1, h2, h3 {
 .phishing-btn:hover:enabled {
     background: var(--btn-hover, #67E8F9);
     color: var(--main-bg, #0F172A);
+}
+
+/* INDEX IMAGE (banner) */
+.banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: 400px;
+    min-height: 40px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0 0 2em 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Topic images for feature links */
+.topic-img {
+    max-width: 60px;
+    max-height: 40px;
+    vertical-align: middle;
+    margin-right: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    padding: 0.5em 2em;
+    border-radius: 0;
+}
+
+.navbar-brand .site-title {
+    color: var(--heading);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 0.3em 0.5em;
+    border-radius: 4px;
+}
+
+.navbar-menu a:hover,
+.navbar-menu a.active {
+    color: var(--main-bg);
+    background: var(--primary-btn);
+}
+
+.navbar-menu a.active {
+    color: #888 !important;
+    background: #e2e8f0 !important;
+    cursor: default;
+    pointer-events: none;
+    font-weight: bold;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+    display: none;
+    font-size: 0.95em;
+    color: var(--text);
+    margin: 0.5em 0 1em 0;
+    padding-left: 1em;
+}
+
+.breadcrumb a {
+    color: var(--primary-btn);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    main {
+        max-width: 98vw;
+        padding: 1em;
+    }
+    .banner-img {
+        height: 60px;
+        min-height: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        max-width: 100vw;
+        padding: 0.5em;
+        border-radius: 0;
+        margin: 0;
+    }
+    .banner-img {
+        height: 40px;
+        min-height: 20px;
+        margin-bottom: 1em;
+        display: block;
+    }
+    .feature-links {
+        gap: 0.5em;
+    }
+    .feature-btn {
+        font-size: 1em;
+        padding: 0.7em 1em;
+        flex-direction: row;
+        align-items: center;
+    }
+    .topic-img {
+        max-width: 40px;
+        max-height: 40px;
+        margin-right: 0.5em;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.5em 1em;
+    }
+    .navbar-menu {
+        flex-direction: column;
+        gap: 0.5em;
+        width: 100%;
+        padding-left: 0;
+    }
+    .navbar-menu li {
+        width: 100%;
+    }
+    .navbar-menu a, .navbar-menu a.active {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 0.5em 0.7em;
+        font-size: 1em;
+        border-radius: 4px;
+    }
+    header h1 {
+        font-size: 1.2rem;
+    }
+    header p {
+        font-size: 0.9rem;
+    }
+    .phishing-email-card {
+        padding: 0.7em;
+        font-size: 0.95em;
+    }
+    .phishing-email-header {
+        font-size: 1em;
+    }
+    .phishing-btn, #next-btn, #prev-btn, #restart-btn {
+        font-size: 0.95em;
+        padding: 0.5em 1em;
+        margin: 0.5em 0.2em 0 0;
+    }
+    input[type="password"] {
+        width: 90%;
+        font-size: 1em;
+    }
+    .breadcrumb {
+        display: block;
+    }
+    .navbar-menu {
+        display: none;
+    }
 }
