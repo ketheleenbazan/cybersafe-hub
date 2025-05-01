@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberSafe Hub - Email Breach Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="static/images/logo-breach-checker.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <img src="static/images/logo-breach-checker.png" alt="CyberSafe Hub Logo" class="navbar-logo">
+                <a href="index.html" class="site-title">CyberSafe Hub</a>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="password.html">Password Checker</a></li>
+                <li><a href="phishing.html">Phishing Awareness</a></li>
+                <li><a href="url-checker.html">URL Detector</a></li>
+                <li><a class="active">Breach Checker</a></li>
+                <li><a href="quiz.html">Quiz Game</a></li>
+            </ul>
+        </nav>
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a> &gt; <span>Breach Checker</span>
+        </nav>
+    </header>
+    <div class="page-banner-container">
+        <img src="static/images/banner-breach-checker.png" alt="Email Breach Checker Banner" class="page-banner-img">
+    </div>
+    <main>
+        <h2>Email Breach Checker</h2>
+        <div class="card">
+            <p>
+                Check if your email address has appeared in any known data breaches.
+                <br>
+                <strong>Note:</strong> This is a simulated check in this demo. A real check requires a secure backend connection to the "Have I Been Pwned?" API.
+            </p>
+            <label for="email-input"><strong>Enter your email:</strong></label><br>
+            <input type="email" id="email-input" placeholder="your.email@example.com" style="width: 80%; padding: 0.5em; font-size: 1em; margin-top: 0.5em;">
+            <button id="check-email-btn" style="margin-left:1em; padding:0.5em 1em; font-size:1em;">Check Email</button>
+            <div id="breach-feedback" style="margin-top:1em;"></div>
+        </div>
+        <div class="card">
+            <h3>What is a Data Breach?</h3>
+            <p>
+                A data breach happens when sensitive information (like email addresses, passwords, or personal details) is stolen or exposed from a company or website's database.
+            </p>
+            <p>
+                If your email is found in a breach, it's important to change your password for that service and any other accounts where you used the same password.
+            </p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 CyberSafe Hub</p>
+    </footer>
+    <script src="static/js/breach-checker.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>

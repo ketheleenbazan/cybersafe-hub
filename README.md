@@ -6,30 +6,39 @@ CyberSafe Hub is an interactive cybersecurity awareness website designed for non
 
 ## 🚀 Live Demo
 
-View and share the site using **GitHub Pages**:  
-https://ketheleenbazan.github.io/cybersafe-hub/
+View and share the site using **GitHub Pages**:
+[https://ketheleenbazan.github.io/cybersafe-hub/](https://ketheleenbazan.github.io/cybersafe-hub/)
 
 ---
 
 ## Features
 
-- **Password Strength Checker:**  
+- **Password Strength Checker:**
   - Clear instructions for creating strong passwords.
   - Input field and "Check Password" button.
   - Real-time, color-coded feedback and suggestions for improvement.
   - Detects common patterns and provides actionable tips.
 
-- **Phishing Awareness Game:**  
+- **Phishing Awareness Game:**
   - Practice spotting phishing emails with 30+ realistic, interactive examples.
   - Each game session presents 5 random emails.
   - Mimics real email formatting for authenticity.
   - Instant feedback and explanations for each answer.
 
-- **Cybersecurity Quiz Game:**  
+- **Cybersecurity Quiz Game:**
   - Test your knowledge with a fun, beginner-friendly quiz.
   - Each game presents 5 random questions from a pool of 40+.
   - Previous/Next navigation, answer changing, and color-coded score feedback.
   - Play again for new random questions.
+
+- **Fake URL Detector:**
+  - Input a website address (URL) to check for common signs of phishing or suspicious links.
+  - Uses basic checks for IP addresses, excessive subdomains, and common misspellings.
+  - Provides instant feedback on potential risks.
+
+- **Email Breach Checker (Simulated):**
+  - Allows users to enter an email address to check if it has appeared in known data breaches.
+  - **Note:** This is a simulated feature in this static demo. A real implementation requires a secure backend server to interact with APIs like "Have I Been Pwned?".
 
 ---
 
@@ -52,8 +61,8 @@ https://ketheleenbazan.github.io/cybersafe-hub/
 
 ## Navigation
 
-- The homepage (`index.html`) explains the site’s purpose and provides clear links to each feature.
-- Each feature has its own page with simple instructions and a “Back to Home” link for easy navigation.
+- The top navigation bar provides links to all sections of the site.
+- On smaller screens, a simple breadcrumb shows your current location.
 
 ---
 
