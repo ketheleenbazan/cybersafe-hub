@@ -6,39 +6,46 @@ CyberSafe Hub is an interactive cybersecurity awareness website designed for non
 
 ## 🚀 Live Demo
 
-View and share the site using **GitHub Pages**:
-[https://ketheleenbazan.github.io/cybersafe-hub/](https://ketheleenbazan.github.io/cybersafe-hub/)
+View and share the site using **GitHub Pages**:  
+https://ketheleenbazan.github.io/cybersafe-hub/
 
 ---
 
 ## Features
 
-- **Password Strength Checker:**
+- **Password Strength Checker:**  
   - Clear instructions for creating strong passwords.
   - Input field and "Check Password" button.
   - Real-time, color-coded feedback and suggestions for improvement.
   - Detects common patterns and provides actionable tips.
 
-- **Phishing Awareness Game:**
+- **Phishing Awareness Game:**  
   - Practice spotting phishing emails with 30+ realistic, interactive examples.
   - Each game session presents 5 random emails.
   - Mimics real email formatting for authenticity.
   - Instant feedback and explanations for each answer.
 
-- **Cybersecurity Quiz Game:**
+- **Cybersecurity Quiz Game:**  
   - Test your knowledge with a fun, beginner-friendly quiz.
   - Each game presents 5 random questions from a pool of 40+.
   - Previous/Next navigation, answer changing, and color-coded score feedback.
   - Play again for new random questions.
 
-- **Fake URL Detector:**
+- **Fake URL Detector:**  
   - Input a website address (URL) to check for common signs of phishing or suspicious links.
   - Uses basic checks for IP addresses, excessive subdomains, and common misspellings.
   - Provides instant feedback on potential risks.
 
-- **Email Breach Checker (Simulated):**
-  - Allows users to enter an email address to check if it has appeared in known data breaches.
-  - **Note:** This is a simulated feature in this static demo. A real implementation requires a secure backend server to interact with APIs like "Have I Been Pwned?".
+- **Email Breach Checker (Real API Integration!):**  
+  - Enter your email address to check if it has appeared in any known data breaches.
+  - Uses a secure Flask backend (deployed on Heroku) to call the Have I Been Pwned API.
+  - Real-time, actionable feedback with a list of breached sites if found.
+  - **Test the backend directly with Postman:**  
+    - **POST** to `https://cybersafe-hub-762e7d7f2358.herokuapp.com/check_breach`  
+    - Body (raw JSON):  
+      ```json
+      { "email": "your@email.com" }
+      ```
 
 ---
 
@@ -71,6 +78,8 @@ View and share the site using **GitHub Pages**:
 - HTML
 - CSS (custom palette: navy, teal, green, yellow, red, white)
 - JavaScript
+- Python (Flask backend for breach checker)
+- Heroku (backend deployment)
 
 ---
 

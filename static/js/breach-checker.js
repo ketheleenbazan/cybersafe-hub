@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         breachFeedbackDiv.innerHTML = "<span style='color:#FACC15; font-weight:bold;'>Checking...</span>";
 
         try {
-            // Send the email to your backend endpoint (on port 7000)
-            const response = await fetch('http://localhost:7000/check_breach', {
+            // Use Heroku backend URL here!
+            const response = await fetch('https://cybersafe-hub-762e7d7f2358.herokuapp.com/check_breach', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Fetch error:', error);
-            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>Could not connect to the server. Please make sure the backend is running on port 7000.</span>";
+            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>Could not connect to the server. Please try again later.</span>";
         }
     }
 });
