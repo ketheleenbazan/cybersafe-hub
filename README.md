@@ -19,6 +19,14 @@ https://ketheleenbazan.github.io/cybersafe-hub/
   - Real-time, color-coded feedback and suggestions for improvement.
   - Detects common patterns and provides actionable tips.
 
+- **🔐 Password Attack Simulator (Exclusive Feature!):**  
+  - Enter any password to see how long it would take to crack using real-world attack strategies.
+  - **Brute-force Estimation:** Calculates time to crack based on password length and character set (upper/lowercase, digits, special characters).
+  - **Dictionary & Pattern Checks:** Instantly detects if the password is found in a common wordlist, matches keyboard patterns, dates, repeated sequences, leetspeak, or reversed common passwords.
+  - **Risk Level Analysis:** Clearly shows if your password is Low, Medium, or High risk.
+  - **Animated Attack Simulation:** Visually demonstrates a brute-force attack, making password security tangible and engaging.
+  - 100% custom logic (no third-party APIs) and real-time feedback.
+
 - **Phishing Awareness Game:**  
   - Practice spotting phishing emails with 30+ realistic, interactive examples.
   - Each game session presents 5 random emails.
