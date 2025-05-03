@@ -431,3 +431,95 @@ h1, h2, h3 {
 
 
 /* test */
+
+/* dropwdown */
+/* Dropdown styles for Cyber Lab */
+/* Navbar Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0.3em 0.5em;
+    font-size: 1em;
+    font-weight: 500;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: var(--card-bg, #1E293B);
+    min-width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1;
+    border-radius: 6px;
+}
+.dropdown-content a {
+    color: var(--text, #E2E8F0);
+    padding: 0.7em 1em;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+    border-radius: 6px;
+}
+.dropdown-content a:hover {
+    background: var(--primary-btn, #38BDF8);
+    color: var(--main-bg, #0F172A);
+}
+/* Remove hover/focus open, use .show class for click-to-open */
+.dropdown.show .dropdown-content {
+    display: block;
+}
+.dropdown.show .dropbtn {
+    background: var(--primary-btn, #38BDF8);
+    color: var(--main-bg, #0F172A);
+    border-radius: 4px;
+}
+
+/* 
+
+// /* Cyber Lab expandable feature button */
+.feature-btn.cyberlab-expand-btn {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+.feature-btn.cyberlab-expand-btn .cyberlab-links {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    background: var(--card-bg, #1E293B);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    min-width: 220px;
+    width: calc(100% - 2.5em); /* match button width minus padding */
+    z-index: 2;
+    margin-top: 0.5em;
+    padding: 0.5em 0;
+    text-align: center;
+}
+.feature-btn.cyberlab-expand-btn .cyberlab-links a {
+    display: block;
+    color: var(--text, #E2E8F0);
+    padding: 0.5em 1em;
+    text-decoration: none;
+    font-size: 0.95em; /* slightly smaller for hierarchy */
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+.feature-btn.cyberlab-expand-btn .cyberlab-links a:hover {
+    background: var(--primary-btn, #38BDF8);
+    color: var(--main-bg, #0F172A);
+}
+.feature-btn.cyberlab-expand-btn.active .cyberlab-links {
+    display: block;
+}
