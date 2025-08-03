@@ -14,35 +14,43 @@ https://ketheleenbazan.github.io/cybersafe-hub/
 ## Features
 
 - **Password Strength Checker:**  
-  - Clear instructions for creating strong passwords.
-  - Input field and "Check Password" button.
-  - Real-time, color-coded feedback and suggestions for improvement.
-  - Detects common patterns and provides actionable tips.
+  - Instantly processes any password entered.
+  - Instant feedback using colors green, yellow, and red.
+  - Provides feedback on how to improve weaker passwords.
+  - Identifies common weak patterns like the birthdays, names, or sequences that are easy to guess.
+  - Nothing but clear, simple, and non-technical explanations.
 
-- **🔐 Password Attack Simulator (Exclusive Feature!):**  
-  - Enter any password to see how long it would take to crack using real-world attack strategies.
-  - **Brute-force Estimation:** Calculates time to crack based on password length and character set (upper/lowercase, digits, special characters).
-  - **Dictionary & Pattern Checks:** Instantly detects if the password is found in a common wordlist, matches keyboard patterns, dates, repeated sequences, leetspeak, or reversed common passwords.
-  - **Risk Level Analysis:** Clearly shows if your password is Low, Medium, or High risk.
-  - **Animated Attack Simulation:** Visually demonstrates a brute-force attack, making password security tangible and engaging.
-  - 100% custom logic (no third-party APIs) and real-time feedback.
+- **Password Attack Simulator (Exclusive Feature!):**  
+  - Demonstrates how long it takes for a hacker to crack passwords using brute-force methods.
+  - Computes how long it would take to crack a password based on its length, entropy, and diversity of characters.
+  - Detects common dictionary words, simple numeric sequences like 1234, or common patterns.
+  - Shows simple yet effective explanations using animations of brute-force methods so that users understand how attackers operate.
+  - The system also gives risk ratings of High, Medium, or Low.
+  - Custom brute-force risk detection logic with no third-party dependencies.
 
 - **Phishing Awareness Game:**  
-  - Practice spotting phishing emails with 30+ realistic, interactive examples.
-  - Each game session presents 5 random emails.
-  - Mimics real email formatting for authenticity.
-  - Instant feedback and explanations for each answer.
+  - Phishing Awareness Game consists of 30+ realistic Phishing emails that are designed to be interactive.
+  - Phishing: users must identify whether each email presented to them is real, computer-generated, or contains phishing content. Automated, tailored explanations of each evaluation are given right after scoring.
+  - Realistic stimulation: the messages are crafted to resemble genuine email threads, increasing the difficulty of the task.
 
 - **Cybersecurity Quiz Game:**  
-  - Test your knowledge with a fun, beginner-friendly quiz.
-  - Each game presents 5 random questions from a pool of 40+.
-  - Previous/Next navigation, answer changing, and color-coded score feedback.
-  - Play again for new random questions.
+  - Playful evaluation to reinforce previously learned material.
+  - Players are given five questions per session, drawn from a database of more than 40 questions.
+  - Questions can be answered in any order, and participants can change their responses at any time.
+  - Results are presented in a score report, associating each question with color-coded performance levels, enabling users to easily gauge their results.
+  - Sessions are replayable and yield different questions with each attempt.
 
 - **Fake URL Detector:**  
-  - Input a website address (URL) to check for common signs of phishing or suspicious links.
-  - Uses basic checks for IP addresses, excessive subdomains, and common misspellings.
-  - Provides instant feedback on potential risks.
+  - Examining potentially dangerous links.
+  - URL evaluation is done in real-time and the results are processed instantly.
+  - Flagged content includes:
+    - Dashes or other distinct characters prior to or after the web addressIP.
+    - Addresses that are not in the standard format.
+    - Domains that do not qualify as brand names (ex. “Brand 100” could be shortened to “bg100” or “b100”).
+    - Brand names with the “.com” extension.
+    - Ports that are not secured (missing HTTPS).
+    - Can be annotated with explanations.
+  - Classification ranges from green, yellow, and red, or red as a predefined warning with rationale.
 
 - **Email Breach Checker (Real API Integration!):**  
   - Enter your email address to check if it has appeared in any known data breaches.

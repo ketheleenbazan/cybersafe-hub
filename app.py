@@ -6,7 +6,6 @@ from bson import ObjectId
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
-from stegano import lsb
 from PIL import Image
 import io
 import base64
