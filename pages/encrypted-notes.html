@@ -1,0 +1,142 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- tells the browser this is an HTML5 document -->
+<html lang="en"> <!-- sets main page language to English -->
+  <head>
+    <meta charset="UTF-8" /> <!-- makes sure characters (letters, symbols, accents) show correctly -->
+    <title>Encrypted Notes Vault</title> <!-- text shown in browser tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- keeps the site responsive so it fits on phones/tablets -->
+
+    <!-- favicon (small tab icon) -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="static/images/favicon.ico"
+    />
+
+    <!-- Google Fonts for cleaner looking text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main site CSS -->
+    <link rel="stylesheet" href="static/css/style.css" />
+
+    <!-- Inline CSS just for this page -->
+    <style>
+      .vault-explanation {
+        background: #fff; /* white background for readability */
+        color: #222; /* dark text */
+        border-radius: 10px; /* rounded edges */
+        padding: 32px; /* space inside the box */
+        margin: 48px auto; /* centers box with margin around */
+        max-width: 600px; /* keeps content at a nice readable width */
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); /* soft shadow for depth */
+      }
+      .vault-explanation h1 {
+        color: #007bff; /* bright blue heading to stand out */
+      }
+      .vault-explanation a {
+        color: #007bff; /* links in blue so they’re clear */
+        font-weight: bold; /* makes links pop out */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"> <!-- top nav bar -->
+        <div class="navbar-brand"> <!-- site logo + title -->
+          <img
+            src="static/images/logo-index.png"
+            alt="CyberSafe Hub Logo"
+            class="navbar-logo"
+          />
+          <a href="index.html" class="site-title">CyberSafe Hub</a>
+        </div>
+        <ul class="navbar-menu"> <!-- nav links -->
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown menu -->
+            <button class="dropbtn" id="cyberlab-dropbtn">
+              Cyber Lab &#x25BC;
+            </button>
+            <div class="dropdown-content" id="cyberlab-dropdown-content">
+              <a class="active">Encrypted Notes Vault</a> <!-- active = current page -->
+              <a href="cipher-playground.html">Custom Cipher Playground</a>
+              <a href="threat-library.html">Threat Library</a>
+            </div>
+          </li>
+          <li><a href="password.html">Password Checker</a></li>
+          <li><a href="phishing.html">Phishing Awareness</a></li>
+          <li><a href="url-checker.html">URL Detector</a></li>
+          <li><a href="breach-checker.html">Breach Checker</a></li>
+          <li><a href="quiz.html">Quiz Game</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li id="auth-btn-li">
+            <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="vault-explanation"> <!-- main info box -->
+        <h1>Encrypted Notes Vault</h1>
+        <p>
+          The Encrypted Notes Vault lets you securely store your private notes
+          using strong encryption.<br />
+          <b>How does it work?</b>
+        </p>
+        <ul>
+          <li>You choose a passphrase and type your note.</li>
+          <li>Your note is encrypted in your browser before it is saved.</li>
+          <li>
+            Only someone with the correct passphrase can decrypt and read your
+            notes.
+          </li>
+          <li>Great for learning about real-world encryption and privacy!</li>
+        </ul>
+        <p>
+          <b>Want to try it out and save your secure notes?</b><br />
+          <a href="/login">Log in to your dashboard</a> to access the interactive
+          Encrypted Notes Vault and manage your encrypted notes!
+        </p>
+        <!-- explanation: encryption is done client-side, so notes are secure -->
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CyberSafe Hub</p> <!-- footer -->
+    </footer>
+    
+    <!-- main site JS -->
+    <script src="static/js/main.js"></script>
+
+    <script>
+      // Dropdown toggle logic for Cyber Lab menu
+      document.addEventListener("DOMContentLoaded", function () {
+        var dropdown = document.getElementById("cyberlab-dropdown");
+        var btn = document.getElementById("cyberlab-dropbtn");
+        
+        // open/close dropdown when button is clicked
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation(); // prevents click from closing instantly
+          dropdown.classList.toggle("open");
+        });
+        
+        // close dropdown when clicking anywhere outside
+        document.addEventListener("click", function () {
+          dropdown.classList.remove("open");
+        });
+      });
+    </script>
+  </body>
+</html>

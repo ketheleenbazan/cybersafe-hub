@@ -1,11 +1,13 @@
-// static/js/password-attack-simulator.js
-
+// wait until the page has fully loaded before running any of this
 document.addEventListener('DOMContentLoaded', function() {
+    // grab the input where the user types their password
     const input = document.getElementById('attack-password-input');
+    // grab the "simulate attack" button
     const btn = document.getElementById('simulate-attack-btn');
+    // grab the div where feedback/results will be displayed
     const feedback = document.getElementById('attack-simulator-feedback');
 
-    // Add animation div if not present
+    // create an animation area below the feedback if it doesn’t already exist
     let animationDiv = document.getElementById('attack-simulator-animation');
     if (!animationDiv) {
         animationDiv = document.createElement('div');
@@ -14,17 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
         feedback.parentNode.insertBefore(animationDiv, feedback.nextSibling);
     }
 
+    // if for some reason elements don’t exist, stop the script
     if (!input || !btn || !feedback) return;
 
+    // when the user clicks the "simulate attack" button
     btn.addEventListener('click', function() {
         const password = input.value;
-        animationDiv.innerHTML = ""; // Clear previous animation
+        animationDiv.innerHTML = ""; // clear any previous animation
+
+        // if nothing was typed, show a warning
         if (!password) {
             feedback.innerHTML = "<span style='color:#FF6B6B;'>Please enter a password.</span>";
             return;
         }
+
+        // run the analysis function to check how strong the password is
         const result = analyzePasswordAttack(password);
 
+        // show the results in the feedback area
         feedback.innerHTML = `
             <b>Character sets used:</b> ${result.charsets.join(', ')}<br>
             <b>Entropy:</b> ${result.entropyBits.toFixed(2)} bits (${result.poolSize}<sup>${result.length}</sup>)<br>
@@ -35,39 +44,41 @@ document.addEventListener('DOMContentLoaded', function() {
             ${result.warning ? `<br><span style="color:#FF6B6B; font-weight:bold;">${result.warning}</span>` : ""}
         `;
 
-        // Animate only if not instantly crackable
+        // if the password is super weak (cracked instantly), just show that
         if (result.instantCrack) {
             animationDiv.innerHTML = `<b>Simulating attack:</b> <span style="color:#FF6B6B;">Password cracked instantly!</span>`;
         } else {
+            // otherwise, run the fake brute force animation
             animateBruteForce(result.guesses, result.timeOfflineRaw);
         }
     });
 
+    // this function fakes a brute-force attack animation so users can "see" the guessing process
     function animateBruteForce(guesses, seconds) {
-        // Cap the animation for performance
-        const maxSteps = 100; // Number of animation steps
-        let displayGuesses = guesses;
-        let step = 0;
-        let interval = 20; // ms per step
-
-        // If guesses is huge, animate logarithmically
+        const maxSteps = 100; // we limit the animation so it doesn’t take forever
         let steps = [];
+
+        // if there are a crazy number of guesses, spread them out logarithmically
         if (guesses > maxSteps) {
             for (let i = 1; i <= maxSteps; i++) {
                 steps.push(Math.floor(Math.pow(guesses, i / maxSteps)));
             }
         } else {
+            // if the guesses number is small, just go step by step
             for (let i = 1; i <= guesses; i++) {
                 steps.push(i);
             }
         }
 
-        animationDiv.innerHTML = `<b>Simulating attack:</b> <span id="brute-counter" style="font-family:monospace;"></span><br>
+        // set up the HTML structure for the animation
+        animationDiv.innerHTML = `<b>Simulating attack:</b> 
+        <span id="brute-counter" style="font-family:monospace;"></span><br>
         <span id="brute-time"></span>`;
 
         const counter = document.getElementById('brute-counter');
         const timeSpan = document.getElementById('brute-time');
 
+        // recursive function to update the counter and time
         function update(stepIdx) {
             if (stepIdx >= steps.length) {
                 counter.textContent = steps[steps.length - 1].toLocaleString();
@@ -75,130 +86,95 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             counter.textContent = steps[stepIdx].toLocaleString();
-            // Show estimated time at this guess count
-            let currentTime = (steps[stepIdx] / 10_000_000_000);
+            let currentTime = (steps[stepIdx] / 10_000_000_000); // offline rate
             timeSpan.innerHTML = `<b>Time elapsed:</b> ${formatTime(currentTime)}`;
-            setTimeout(() => update(stepIdx + 1), interval);
+            setTimeout(() => update(stepIdx + 1), 20); // run again after 20ms
         }
         update(0);
     }
 
+    // main logic to analyze the password strength
     function analyzePasswordAttack(password) {
-        // Expanded common password dictionary (top 25+)
-        const commonPasswords = [
-            "password", "123456", "123456789", "12345", "12345678", "qwerty", "abc123", "football", "monkey", "letmein",
-            "shadow", "master", "666666", "qwertyuiop", "123321", "mustang", "1234567", "123123", "welcome", "dragon",
-            "passw0rd", "starwars", "654321", "superman", "1qaz2wsx", "michael", "111111", "iloveyou", "admin", "login"
-        ];
+        // list of the most common passwords hackers try first
+        const commonPasswords = ["password", "123456", "123456789", "qwerty", "letmein", "iloveyou", "admin", "welcome", "monkey", "football", "dragon", "111111", "abc123"];
 
-        // Keyboard patterns (expand as needed)
-        const keyboardPatterns = [
-            "qwerty", "asdf", "zxcv", "1234", "1111", "0000", "qazwsx", "1q2w3e", "wasd", "poiuy", "lkjhg"
-        ];
+        // common keyboard patterns (easy to type, easy to guess)
+        const keyboardPatterns = ["qwerty", "asdf", "zxcv", "1234", "1111", "0000", "1q2w3e"];
 
-        // Name + year pattern (simple)
+        // regex to check for "name + year" style passwords (e.g., John1990)
         const nameYearPattern = /^([A-Za-z]+)(19|20)\d{2}[^A-Za-z0-9]*$/;
 
-        // Repeated sequence pattern
+        // check for repeated sequences (like ababab or 121212)
         const repeatedPattern = /(.+)\1{1,}/;
 
-        // Date pattern (e.g., 01011990, 19900101, 12-31-1999)
+        // check for date-style passwords (01011990, 19900101, etc.)
         const datePattern = /^(?:\d{2}[-\/]?\d{2}[-\/]?\d{2,4}|\d{4}[-\/]?\d{2}[-\/]?\d{2})$/;
 
-        // Leetspeak pattern (e.g., p@ssw0rd, l33t)
+        // detect leetspeak versions of common words (e.g., p@ssw0rd)
         const leetPattern = /[a@4][s$5][s$5][wvv][o0][r][d]/i;
 
-        // Simple reversal of common passwords
+        // reversed versions of the common passwords
         const reversedCommon = commonPasswords.map(pw => pw.split('').reverse().join(''));
 
-        // Character sets
+        // figure out which character sets the password uses
         let poolSize = 0;
         let charsets = [];
         if (/[a-z]/.test(password)) { poolSize += 26; charsets.push('lowercase'); }
         if (/[A-Z]/.test(password)) { poolSize += 26; charsets.push('uppercase'); }
         if (/[0-9]/.test(password)) { poolSize += 10; charsets.push('digits'); }
-        if (/[^A-Za-z0-9]/.test(password)) { poolSize += 32; charsets.push('special chars'); } // Approx 32 printable specials
+        if (/[^A-Za-z0-9]/.test(password)) { poolSize += 32; charsets.push('special chars'); }
 
-        // Entropy
+        // measure entropy: higher bits = harder to crack
         const length = password.length;
         const entropyBits = length * Math.log2(poolSize || 1);
 
-        // Brute-force guesses
+        // total number of guesses a brute force attack would need
         const guesses = Math.pow(poolSize || 1, length);
 
-        // Time to crack
-        let timeOnline = formatTime(guesses / 1_000); // 1K/sec
-        let timeOffline = formatTime(guesses / 10_000_000_000); // 10B/sec
+        // estimate cracking time at different speeds
+        let timeOnline = formatTime(guesses / 1_000); // 1,000 guesses per sec
+        let timeOffline = formatTime(guesses / 10_000_000_000); // 10 billion guesses per sec
 
-        // Risk level
-        let riskLevel = "Low", riskColor = "#34D399";
+        // default risk settings
+        let riskLevel = "Low", riskColor = "#34D399"; // green
         let warning = "";
         let instantCrack = false;
 
-        // Dictionary check
+        // check against all the common weakness patterns
         if (commonPasswords.includes(password.toLowerCase())) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
             warning = "This password is found in a common password list!";
             instantCrack = true;
-        }
-        // Keyboard pattern check
-        else if (keyboardPatterns.some(pat => password.toLowerCase().includes(pat))) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
+        } else if (keyboardPatterns.some(pat => password.toLowerCase().includes(pat))) {
             warning = "This password matches a common keyboard pattern!";
             instantCrack = true;
-        }
-        // Name + year pattern
-        else if (nameYearPattern.test(password)) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
+        } else if (nameYearPattern.test(password)) {
             warning = "This password looks like a name followed by a year!";
             instantCrack = true;
-        }
-        // Repeated sequence
-        else if (repeatedPattern.test(password)) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
+        } else if (repeatedPattern.test(password)) {
             warning = "This password contains repeated sequences!";
             instantCrack = true;
-        }
-        // Date pattern
-        else if (datePattern.test(password)) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
+        } else if (datePattern.test(password)) {
             warning = "This password looks like a date!";
             instantCrack = true;
-        }
-        // Leetspeak pattern
-        else if (leetPattern.test(password)) {
-            timeOnline = timeOffline = "<1 second";
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
+        } else if (leetPattern.test(password)) {
             warning = "This password looks like a leetspeak version of a common word!";
             instantCrack = true;
+        } else if (reversedCommon.includes(password.toLowerCase())) {
+            warning = "This password is a reversed common password!";
+            instantCrack = true;
+        } else if (entropyBits < 40) { // weak if entropy < 40
+            riskLevel = "High";
+            riskColor = "#FF6B6B";
+        } else if (entropyBits < 60) { // medium if < 60
+            riskLevel = "Medium";
+            riskColor = "#FACC15";
         }
-        // Reversed common password
-        else if (reversedCommon.includes(password.toLowerCase())) {
+
+        // if flagged as instant crack, force times to "<1 second" and risk high
+        if (instantCrack) {
             timeOnline = timeOffline = "<1 second";
             riskLevel = "High";
             riskColor = "#FF6B6B";
-            warning = "This password is a reversed common password!";
-            instantCrack = true;
-        }
-        // Entropy-based risk
-        else if (entropyBits < 40) {
-            riskLevel = "High";
-            riskColor = "#FF6B6B";
-        }
-        else if (entropyBits < 60) {
-            riskLevel = "Medium";
-            riskColor = "#FACC15";
         }
 
         return {
@@ -217,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    // turns seconds into a human-readable time (like "2 days, 3 hours")
     function formatTime(seconds) {
         if (seconds < 1) return "<1 second";
         const units = [
@@ -234,6 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 seconds -= amt * u.secs;
             }
         }
-        return time.slice(0,2).join(", ");
+        return time.slice(0,2).join(", "); // only show the 2 biggest units
     }
 });

@@ -1,0 +1,97 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- tells browser this is an HTML5 document -->
+<html lang="en"> <!-- sets page language to English -->
+<head> <!-- head section: stuff for the browser, not the user -->
+    <meta charset="UTF-8"> <!-- ensures text/special chars display correctly -->
+    <title>Cybersecurity Quiz - CyberSafe Hub</title> <!-- tab title in browser -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- responsive design (so it works on phones & tablets) -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon-quiz.ico">
+    <!-- little icon in the tab for the quiz page -->
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" 
+        rel="stylesheet">
+    <!-- Google fonts: Montserrat + Poppins for clean modern look -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- main stylesheet with custom design -->
+</head>
+<body> <!-- everything users actually see goes here -->
+    <header> <!-- site header -->
+        <nav class="navbar"> <!-- top nav bar -->
+            <div class="navbar-brand"> <!-- logo + site title -->
+                <img src="static/images/quiz-icon.png" alt="CyberSafe Hub Logo" class="navbar-logo">
+                <!-- quiz-specific logo icon -->
+                <a href="index.html" class="site-title">CyberSafe Hub</a>
+                <!-- site title text (clickable link back to homepage) -->
+            </div>
+            
+            <ul class="navbar-menu"> <!-- nav links -->
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown menu -->
+                    <button class="dropbtn" id="cyberlab-dropbtn">
+                      Cyber Lab &#x25BC;
+                    </button>
+                    <div class="dropdown-content" id="cyberlab-dropdown-content">
+                        <!-- dropdown links that appear when clicked -->
+                        <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+                        <!-- features not ready yet, kept commented for now due to its complexity -->
+                            <!-- <a href="url-reporter.html">Suspicious URL Reporter</a>
+                            <a href="steganography.html">Steganography Tool</a> -->
+                        <a href="cipher-playground.html">Custom Cipher Playground</a>
+                        <a href="threat-library.html">Threat Library</a>
+                    </div>
+                  </li>
+                </li>
+                <li><a href="password.html">Password Checker</a></li>
+                <li><a href="phishing.html">Phishing Awareness</a></li>
+                <li><a href="url-checker.html">URL Detector</a></li>
+                <li><a href="breach-checker.html">Breach Checker</a></li>
+                <li><a class="active">Quiz Game</a></li> <!-- marks this as current page -->
+                <li><a href="about.html">About Us</a></li>
+                <li id="auth-btn-li">
+                    <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+                    <!-- login button (future: changes to logout if logged in) -->
+                </li>
+            </ul>
+        </nav>
+        <nav class="breadcrumb"> <!-- breadcrumb trail for easy navigation -->
+            <a href="index.html">Home</a> &gt; <span>Quiz Game</span>
+            <!-- shows "Home > Quiz Game" -->
+        </nav>
+    </header>
+    <img src="static/images/banner-quiz.png" alt="CyberSafe Hub Banner" class="banner-img">
+    <!-- big banner image across the top for the quiz -->
+
+    <main> <!-- main content area -->
+        <h2>Cybersecurity Quiz Game</h2> <!-- main heading -->
+        <div id="quiz-container"> <!-- box that holds the quiz -->
+            <div id="question"></div> <!-- JS will place the current question here -->
+            <div id="answers"></div> <!-- JS will create answer buttons here -->
+            <div id="feedback"></div> <!-- shows if user was correct/incorrect -->
+            <button id="next-btn" style="display:none;">Next Question</button>
+            <!-- next question button (hidden until user answers) -->
+            <div id="score" style="margin-top:2em;"></div>
+            <!-- score / progress info will appear here -->
+            <!-- explained more in the script file -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CyberSafe Hub</p> <!-- footer text -->
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="static/js/quiz.js"></script>
+    <!-- handles quiz logic: loads questions, checks answers, updates score -->
+    <script src="static/js/main.js"></script>
+    <!-- handles site-wide JS (like nav dropdowns, etc....) -->
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html>
+<!-- standard HTML5 doc declaration as usual -->
+<html lang="en">
+  <!-- page starts, language set to English -->
+  <head>
+    <!-- head = all the behind-the-scenes info for the browser -->
+    <meta charset="UTF-8" />
+    <!-- makes sure all characters show up correctly -->
+    <title>CyberSafe Hub - Email Breach Checker</title>
+    <!-- the page title in the browser tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- makes the page responsive for phones and tablets -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="static/images/logo-breach-checker.png"
+    />
+    <!-- small tab icon for this page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts for clean text styling -->
+    <link rel="stylesheet" href="static/css/style.css" />
+    <!-- linking your custom CSS file -->
+  </head>
+  <body>
+    <!-- everything visible on screen goes inside here -->
+    <header>
+      <!-- top part of the page -->
+      <nav class="navbar">
+        <!-- main navigation bar -->
+        <div class="navbar-brand">
+          <!-- logo + site name -->
+          <img
+            src="static/images/logo-breach-checker.png"
+            alt="CyberSafe Hub Logo"
+            class="navbar-logo"
+          />
+          <!-- site logo specific for breach checker -->
+          <a href="index.html" class="site-title">CyberSafe Hub</a>
+          <!-- site name, links back to home -->
+        </div>
+        <ul class="navbar-menu">
+          <!-- nav links -->
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown" id="cyberlab-dropdown">
+            <!-- dropdown menu -->
+            <button class="dropbtn" id="cyberlab-dropbtn">
+              Cyber Lab &#x25BC;
+            </button>
+            <div class="dropdown-content" id="cyberlab-dropdown-content">
+              <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+              <!-- planned future features commented out for now still to be revised -->
+              <!-- <a href="url-reporter.html">Suspicious URL Reporter</a>
+                        <a href="steganography.html">Steganography Tool</a> -->
+              <a href="cipher-playground.html">Custom Cipher Playground</a>
+              <a href="threat-library.html">Threat Library</a>
+            </div>
+          </li>
+          <li><a href="password.html">Password Checker</a></li>
+          <li><a href="phishing.html">Phishing Awareness</a></li>
+          <li><a href="url-checker.html">URL Detector</a></li>
+          <li><a class="active">Breach Checker</a></li>
+          <!-- highlights current page -->
+          <li><a href="quiz.html">Quiz Game</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li id="auth-btn-li">
+            <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+            <!-- login button -->
+          </li>
+        </ul>
+      </nav>
+      <nav class="breadcrumb">
+        <!-- breadcrumb trail -->
+        <a href="index.html">Home</a> &gt; <span>Breach Checker</span>
+        <!-- shows "Home > Breach Checker" -->
+      </nav>
+    </header>
+    <div class="page-banner-container">
+      <img
+        src="static/images/banner-breach.png"
+        alt="Email Breach Checker Banner"
+        class="banner-img"
+      />
+      <!-- banner image space -->
+    </div>
+    <main>
+      <!-- main content -->
+      <h2>Email Breach Checker</h2>
+      <!-- page title -->
+      <div class="card">
+        <!-- main feature card -->
+        <p>
+          Check if your email address has appeared in any known data breaches.
+          <br />
+          <strong>Note:</strong> This feature uses a secure backend connection
+          to the "Have I Been Pwned?" API.
+        </p>
+        <!-- short intro about what the tool does + note about security -->
+        <label for="email-input"><strong>Enter your email:</strong></label
+        ><br />
+        <input
+          type="email"
+          id="email-input"
+          placeholder="your.email@example.com"
+          style="width: 80%; padding: 0.5em; font-size: 1em; margin-top: 0.5em"
+        />
+        <!-- input box for user's email, styled inline for now -->
+        <button
+          id="check-email-btn"
+          style="margin-left: 1em; padding: 0.5em 1em; font-size: 1em"
+        >
+          Check Email
+        </button>
+        <!-- button user clicks to check -->
+        <div id="breach-feedback" style="margin-top: 1em"></div>
+        <!-- feedback area where results will appear (like "Your email is safe" or "Found in 3 breaches") -->
+      </div>
+
+      <div class="card">
+        <!-- info card -->
+        <h3>What is a Data Breach?</h3>
+        <p>
+          A data breach happens when sensitive information (like email
+          addresses, passwords, or personal details) is stolen or exposed from a
+          company or website's database.
+        </p>
+        <p>
+          If your email is found in a breach, it's important to change your
+          password for that service and any other accounts where you used the
+          same password.
+        </p>
+        <!-- explaining clearly what a breach is + what to do if affected -->
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2025 CyberSafe Hub</p>
+      <!-- footer text -->
+    </footer>
+    <!-- JavaScript files at the bottom -->
+    <script src="static/js/breach-checker.js"></script>
+    <!-- handles the actual check with the API -->
+    <script src="static/js/main.js"></script>
+    <!-- site-wide JS (menu toggles, etc.) -->
+  </body>
+</html>

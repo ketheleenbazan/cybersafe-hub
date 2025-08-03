@@ -1,0 +1,116 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- standard HTML5 declaration -->
+<html lang="en"> <!-- starting the HTML document, language set to English -->
+<head> <!-- head section = background setup for the page -->
+    <meta charset="UTF-8"> <!-- makes sure all characters/symbols display correctly -->
+    <title>About Us - CyberSafe Hub</title> <!-- title in the browser tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- makes page responsive on all devices -->
+    <link rel="icon" type="image/x-icon" href="static/images/about-us.ico">
+    <!-- small icon for the tab, unique for this About page -->
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" 
+        rel="stylesheet">
+    <!-- importing Google Fonts Montserrat + Poppins -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- linking to the main CSS file -->
+</head>
+<body> <!-- everything that appears on screen starts here -->
+    <header> <!-- top navigation area -->
+        <nav class="navbar"> <!-- main navigation bar -->
+            <div class="navbar-brand"> <!-- logo + site title together -->
+                <img src="static/images/about-us-icon.png" alt="CyberSafe Hub Logo" class="navbar-logo">
+                <!-- About Us icon/logo -->
+                <a href="index.html" class="site-title">CyberSafe Hub</a>
+                <!-- site name text that links back to homepage -->
+            </div>
+            <ul class="navbar-menu"> <!-- menu links -->
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown for Cyber Lab -->
+                    <button class="dropbtn" id="cyberlab-dropbtn">
+                      Cyber Lab &#x25BC;
+                    </button>
+                    <!-- ▼ arrow shown next to Cyber Lab -->
+                    <div class="dropdown-content" id="cyberlab-dropdown-content">
+                        <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+                        <!-- features not yet live due to its complexety and are commented out for later review.-->
+                            <!-- <a href="url-reporter.html">Suspicious URL Reporter</a>
+                            <a href="steganography.html">Steganography Tool</a> -->
+                        <a href="cipher-playground.html">Custom Cipher Playground</a>
+                        <a href="threat-library.html">Threat Library</a>
+                    </div>
+                  </li>
+                </li>
+                <li><a href="password.html">Password Checker</a></li>
+                <li><a href="phishing.html">Phishing Awareness</a></li>
+                <li><a href="url-checker.html">URL Detector</a></li>
+                <li><a href="breach-checker.html">Breach Checker</a></li>
+                <li><a href="quiz.html">Quiz Game</a></li>
+                <li><a class="active">About Us</a></li>
+                <!-- marked active so this page shows highlighted in the nav -->
+                <li id="auth-btn-li">
+                    <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+                    <!-- login button (switchable to logout in the future) -->
+                </li>
+            </ul>
+        </nav>
+        <nav class="breadcrumb"> <!-- breadcrumb trail for navigation -->
+            <a href="index.html">Home</a> &gt; <span>About Us</span>
+            <!-- shows "Home > About Us" -->
+        </nav>
+    </header>
+    <img src="static/images/banner-about-us.png" alt="CyberSafe Hub Banner" class="banner-img">
+    <!-- banner image at the top of the About page -->
+
+    <main> <!-- main content of the page -->
+        <h2>About CyberSafe Hub</h2> <!-- main heading -->
+        <div style="line-height: 1.6;"> <!-- content inside a styled card -->
+            <p>
+                <strong>CyberSafe Hub</strong> is an easy-to-use website all about helping people 
+                stay safe online. It's built especially for folks who don't have a tech background 
+                or who sometimes feel a bit lost with all the online threats out there. 
+                The idea is simple: explain cyber safety in plain English, give practical tools, 
+                and make learning about security feel less scary and more doable.
+            </p>
+            <p>
+                On this site, you'll find simple guides, interactive games, and helpful tools 
+                that show you how to protect your personal info and avoid common online dangers. 
+                Whether it's spotting a phishing email, checking if your password is strong, 
+                or making sure a website is safe, CyberSafe Hub gives you the know‑how 
+                without the confusing jargon.
+            </p>
+            <ul> <!-- bullet point list of site features for quick readability -->
+                <li>Learn how to create strong, secure passwords</li>
+                <li>Spot phishing scams with real-world examples</li>
+                <li>Check if websites or URLs look suspicious</li>
+                <li>See if your email was in a data breach</li>
+                <li>Test your knowledge with fun, beginner-friendly quizzes</li>
+            </ul>
+            <p>
+                This project is open source and free to use for anyone. 
+                I created it as part of a digital literacy and cybersecurity education initiative, 
+                because I believe everyone deserves to feel safe and confident online.
+            </p>
+            <p><strong>
+                And on a personal note, I'm dedicating this site to my grandparents, 
+                who always struggled with cyber threats on the internet. 
+                I just wish the information could be easier for them (and for everyone) 
+                to learn and stay safe online. 💙
+            </strong></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 CyberSafe Hub</p> <!-- footer text -->
+    </footer>
+    <script src="static/js/main.js"></script>
+    <!-- JS file for site-wide features (like dropdown menu toggle) -->
+</body>
+</html>

@@ -54,6 +54,17 @@ https://ketheleenbazan.github.io/cybersafe-hub/
       ```json
       { "email": "your@email.com" }
       ```
+- **Encrypted Notes Vault:**  
+  - Encrypt and decrypt notes using AES.
+  - Notes are saved locally or optionally in Firebase.
+
+- **Cipher Builder:**  
+  - Experiment with ciphers (Caesar, Vigenère).
+  - Encrypt or decrypt text with custom keys.
+
+- **Threat Library:**  
+  - Browse topics like ransomware, phishing, social engineering, Wi-Fi risks, GDPR, and more.
+  - Content includes images, text, videos, and links.
 
 ---
 

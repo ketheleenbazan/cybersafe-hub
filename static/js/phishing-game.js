@@ -1,3 +1,7 @@
+// A big list of phishing (fake) and legitimate (real) emails.
+// Each item has: subject, sender address, body content,
+// whether it's phishing, and an explanation.
+
 const allPhishingExamples = [
     // 30 EXAMPLES: Mix of phishing and not phishing, realistic and varied
     {
@@ -212,7 +216,8 @@ const allPhishingExamples = [
     }
 ];
 
-// Utility to shuffle an array
+//ahelper function that randomly shuffles an array
+// (so each game feels different every time).
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -221,17 +226,94 @@ function shuffle(array) {
     return array;
 }
 
-let phishingExamples = [];
-let phishingCurrent = 0;
-let phishingScore = 0;
+//global game variables
+let phishingExamples = []; // the 5 examples for the current game
+let phishingCurrent = 0;   // which example the player is currently on
+let phishingScore = 0;     // how many the player got correct so far
 
+//start or restart the game
 function startPhishingGame() {
+    // to pick 5 random emails out of the big list
     phishingExamples = shuffle([...allPhishingExamples]).slice(0, 5);
     phishingCurrent = 0;
     phishingScore = 0;
-    renderPhishingExample();
+    renderPhishingExample(); // show the first one
 }
 
+//show the current phishing example on the page
+function renderPhishingExample() {
+    const container = document.getElementById('phishing-game-container');
+    const scoreDiv = document.getElementById('phishing-score');
+    scoreDiv.innerHTML = ''; // clear old score info
+
+    // if we've shown all 5 examples, end the game
+    if (phishingCurrent >= phishingExamples.length) {
+        container.innerHTML = `
+            <h3>Game Over!</h3>
+            <p style="color:${phishingScore >= 4 ? '#34D399' : phishingScore === 3 ? '#FACC15' : '#FF6B6B'}; font-weight:bold;">
+                Your Score: ${phishingScore} / ${phishingExamples.length}
+            </p>
+            <button id="phishing-restart-btn" class="phishing-btn">Play Again</button>
+        `;
+        //let the user restart
+        document.getElementById('phishing-restart-btn').onclick = startPhishingGame;
+        return;
+    }
+
+    //grab the current example email
+    const ex = phishingExamples[phishingCurrent];
+
+    //build the email card UI
+    container.innerHTML = `
+        <div class="phishing-email-card">
+            <div class="phishing-email-header">
+                <strong>Subject:</strong> ${ex.subject}<br>
+                <strong>From:</strong> ${ex.from}
+            </div>
+            <div class="phishing-email-body" style="margin:1em 0;">${ex.body}</div>
+        </div>
+        <div class="phishing-game-actions">
+            <button class="phishing-btn" id="phishing-yes">Phishing</button>
+            <button class="phishing-btn" id="phishing-no">Not Phishing</button>
+        </div>
+        <div id="phishing-feedback"></div>
+    `;
+
+    // Attach click events for the two answer buttons
+    document.getElementById('phishing-yes').onclick = () => handlePhishingAnswer(true);
+    document.getElementById('phishing-no').onclick = () => handlePhishingAnswer(false);
+}
+
+//handle when the user chooses "Phishing" or "Not Phishing"
+function handlePhishingAnswer(userChoice) {
+    const ex = phishingExamples[phishingCurrent];
+    const feedbackDiv = document.getElementById('phishing-feedback');
+
+    // to check if the player’s answer matches the real answer
+    let correct = (userChoice === ex.isPhishing);
+    if (correct) phishingScore++; // add a point if correct
+
+    // show feedback and the explanation for the email
+    feedbackDiv.innerHTML = `
+        <span style="color:${correct ? '#34D399' : '#FF6B6B'}; font-weight:bold;">
+            ${correct ? 'Correct!' : 'Incorrect.'}
+        </span> ${ex.explanation}
+        <br><button class="phishing-btn" id="phishing-next">Next</button>
+    `;
+
+    // Disable the two main buttons so the user can’t change their answer
+    document.getElementById('phishing-yes').disabled = true;
+    document.getElementById('phishing-no').disabled = true;
+
+    // Move to the next example when "Next" is clicked
+    document.getElementById('phishing-next').onclick = () => {
+        phishingCurrent++;
+        renderPhishingExample();
+    };
+}
+
+// start the first round of the game when the page loads
+startPhishingGame();
 function renderPhishingExample() {
     const container = document.getElementById('phishing-game-container');
     const scoreDiv = document.getElementById('phishing-score');
@@ -285,5 +367,6 @@ function handlePhishingAnswer(userChoice) {
     };
 }
 
-// Start the first game
+
+//start the first round of the game when the page loads
 startPhishingGame();

@@ -1,3 +1,6 @@
+// This is the full list of quiz questions the game can use
+// each question has: the text, a list of answers, which one is correct, and an explanation
+
 const allQuizQuestions = [
     {
         question: "What is a strong password?",
@@ -10,6 +13,7 @@ const allQuizQuestions = [
         correct: 2,
         explanation: "A strong password uses a mix of letters, numbers, and symbols. Avoid using personal info or common words."
     },
+    // ... more questions below (all same structure) ...
     {
         question: "What should you do if you receive an email from your bank asking for your password?",
         answers: [
@@ -463,7 +467,7 @@ const allQuizQuestions = [
     }
 ];
 
-// Utility to shuffle an array
+//little helper to shuffle questions randomly so the quiz feels different each time
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -472,36 +476,40 @@ function shuffle(array) {
     return array;
 }
 
-let quizQuestions = [];
-let userAnswers = [];
-let currentQuestion = 0;
+// variables to keep track of the quiz state
+let quizQuestions = [];   // stores the actual set of 5 questions for this game
+let userAnswers = [];     // stores what the user picked for each question
+let currentQuestion = 0;  // index of the question we’re currently on
 
+// grab references to elements in the page
 const questionDiv = document.getElementById('question');
 const answersDiv = document.getElementById('answers');
 const feedbackDiv = document.getElementById('feedback');
 const nextBtn = document.getElementById('next-btn');
 const scoreDiv = document.getElementById('score');
 
-// Create Previous button
+// create a "Previous" button so the user can go back
 const prevBtn = document.createElement('button');
 prevBtn.id = 'prev-btn';
 prevBtn.textContent = 'Previous';
 prevBtn.style.marginRight = '1em';
 
+// function to start the quiz
 function startQuiz() {
-    quizQuestions = shuffle([...allQuizQuestions]).slice(0, 5);
-    userAnswers = Array(quizQuestions.length).fill(null);
+    quizQuestions = shuffle([...allQuizQuestions]).slice(0, 5); // pick 5 random questions
+    userAnswers = Array(quizQuestions.length).fill(null); // reset answers
     currentQuestion = 0;
     scoreDiv.innerHTML = '';
-    showQuestion();
+    showQuestion(); // show the first question
 }
 
+// show the current question and its answers
 function showQuestion() {
     feedbackDiv.textContent = '';
     answersDiv.innerHTML = '';
     questionDiv.textContent = `Q${currentQuestion + 1}: ${quizQuestions[currentQuestion].question}`;
 
-    // Show answer buttons
+    // create buttons for each possible answer
     quizQuestions[currentQuestion].answers.forEach((ans, idx) => {
         const btn = document.createElement('button');
         btn.textContent = ans;
@@ -509,20 +517,22 @@ function showQuestion() {
         btn.style.display = 'block';
         btn.style.margin = '0.5em 0';
         btn.onclick = () => selectAnswer(idx);
-        // Highlight if already selected
+
+        // if user already answered, highlight their previous choice
         if (userAnswers[currentQuestion] === idx) {
             btn.style.background = '#005fa3';
             btn.style.color = '#fff';
         }
+
         answersDiv.appendChild(btn);
     });
 
-    // Add navigation buttons
+    //set up the "Next" button
     nextBtn.style.display = 'inline-block';
     nextBtn.textContent = (currentQuestion === quizQuestions.length - 1) ? 'See Results' : 'Next';
     nextBtn.disabled = userAnswers[currentQuestion] === null;
 
-    // Add Previous button if not first question
+    //only show the Previous button if we’re not on the first question
     if (currentQuestion > 0) {
         if (!answersDiv.contains(prevBtn)) {
             answersDiv.prepend(prevBtn);
@@ -532,27 +542,29 @@ function showQuestion() {
         prevBtn.style.display = 'none';
     }
 
-    // Show feedback if already answered
+    //if they already answered, show the feedback again
     if (userAnswers[currentQuestion] !== null) {
         showFeedback(userAnswers[currentQuestion]);
-    } else {
-        feedbackDiv.textContent = '';
     }
 }
 
+//handles what happens when a user selects an answer
 function selectAnswer(idx) {
     userAnswers[currentQuestion] = idx;
-    // Highlight selected button
+
+    //highlight the button the user chose
     Array.from(answersDiv.children).forEach((btn, i) => {
         if (btn.className === 'answer-btn') {
             btn.style.background = (i === idx) ? '#005fa3' : '#0074D9';
-            btn.style.color = (i === idx) ? '#fff' : '#fff';
+            btn.style.color = '#fff';
         }
     });
-    nextBtn.disabled = false;
-    showFeedback(idx);
+
+    nextBtn.disabled = false; // allow moving forward
+    showFeedback(idx);        // show if they were right or wrong
 }
 
+// show feedback ("Correct!" or "Incorrect.") plus explanation
 function showFeedback(selected) {
     const q = quizQuestions[currentQuestion];
     if (selected === q.correct) {
@@ -562,6 +574,7 @@ function showFeedback(selected) {
     }
 }
 
+// move forward when clicking Next
 nextBtn.onclick = () => {
     if (userAnswers[currentQuestion] === null) {
         feedbackDiv.innerHTML = `<span style="color:red;">Please select an answer before proceeding.</span>`;
@@ -575,6 +588,7 @@ nextBtn.onclick = () => {
     }
 };
 
+// go back when clicking Previous
 prevBtn.onclick = () => {
     if (currentQuestion > 0) {
         currentQuestion--;
@@ -582,6 +596,7 @@ prevBtn.onclick = () => {
     }
 };
 
+// after the last question, show the score
 function showScore() {
     const score = userAnswers.reduce((acc, ans, idx) => acc + (ans === quizQuestions[idx].correct ? 1 : 0), 0);
     let scoreColor = '';
@@ -598,11 +613,13 @@ function showScore() {
         feedbackMsg = "Excellent! You're a CyberSafe star! 🌟";
     }
 
+    // clear quiz elements and show the results
     questionDiv.textContent = '';
     answersDiv.innerHTML = '';
     feedbackDiv.textContent = '';
     nextBtn.style.display = 'none';
     prevBtn.style.display = 'none';
+
     scoreDiv.innerHTML = `
         <h3 style="color:${scoreColor};">Your Score: ${score} / ${quizQuestions.length}</h3>
         <p style="color:${scoreColor}; font-weight:bold;">${feedbackMsg}</p>
@@ -611,11 +628,10 @@ function showScore() {
     document.getElementById('restart-btn').onclick = startQuiz;
 }
 
-
-// Add navigation buttons to the DOM if not already present
+// make sure Previous button is placed in DOM
 if (!document.getElementById('prev-btn')) {
     nextBtn.parentNode.insertBefore(prevBtn, nextBtn);
 }
 
-// Start the first quiz
+// start the quiz right away
 startQuiz();

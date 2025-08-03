@@ -1,76 +1,94 @@
+// this script runs only after the page has fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    const emailInput = document.getElementById('email-input');
-    const checkEmailBtn = document.getElementById('check-email-btn');
-    const breachFeedbackDiv = document.getElementById('breach-feedback');
 
+    // grab the elements from the page that we’ll be working with
+    const emailInput = document.getElementById('email-input'); // where the user types their email
+    const checkEmailBtn = document.getElementById('check-email-btn'); // the button they click
+    const breachFeedbackDiv = document.getElementById('breach-feedback'); // the box where feedback will appear
+
+    // if for some reason the page doesn’t have these elements, we just stop the script
     if (!emailInput || !checkEmailBtn || !breachFeedbackDiv) return;
 
+    // when the user clicks the button, we run the checkBreach function
     checkEmailBtn.addEventListener('click', checkBreach);
 
+    // the main function that checks if the email has been found in any data breaches
     async function checkBreach() {
+        // get the email typed by the user, and trim removes extra spaces at the start/end
         const email = emailInput.value.trim();
 
+        // if the email box is empty, show a message and stop here
         if (email === "") {
-            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>Please enter an email address to check.</span>";
+            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>please enter an email address to check.</span>";
             return;
         }
 
+        // this regular expression (regex) checks if the email looks like a real email address
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>Please enter a valid email address.</span>";
+            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>please enter a valid email address.</span>";
             return;
         }
 
-        breachFeedbackDiv.innerHTML = "<span style='color:#FACC15; font-weight:bold;'>Checking...</span>";
+        // while waiting for the server to respond, we show a “checking…” message
+        breachFeedbackDiv.innerHTML = "<span style='color:#FACC15; font-weight:bold;'>checking...</span>";
 
         try {
-            // Use Heroku backend URL here!
+            // here we make a request to our backend server
+            // this backend connects to “Have I Been Pwned?” (a well‑known site that checks breaches)
             const response = await fetch('https://cybersafe-hub-762e7d7f2358.herokuapp.com/check_breach', {
-                method: 'POST',
+                method: 'POST', // we are sending data, so we use POST
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // we tell the server we’re sending JSON data
                 },
-                body: JSON.stringify({ email: email }),
+                body: JSON.stringify({ email: email }), // here we send the email the user typed
             });
 
+            // the server sends back a response, and we convert it from JSON so we can use it
             const result = await response.json();
 
-            // Handle the response from your backend
-            if (response.ok) { // Status code is 2xx
+            // if the server says everything is okay (status code between 200 and 299)
+            if (response.ok) { 
                 if (result.status === 'pwned') {
-                    // Email found in breaches
+                    // this means the email was found in one or more data breaches
+                    // we make a list of all the breaches where it was found
                     let breachList = result.breaches.map(b => `<li>${b.Name} (${b.Title})</li>`).join('');
                     breachFeedbackDiv.innerHTML = `
-                        <span style='color:#FF6B6B; font-weight:bold;'>Oh no! This email was found in ${result.breaches.length} breach(es):</span>
+                        <span style='color:#FF6B6B; font-weight:bold;'>oh no! this email was found in ${result.breaches.length} breach(es):</span>
                         <ul>${breachList}</ul>
-                        <p><strong>Action:</strong> It's highly recommended to change your password for services using this email, especially for the sites listed above.</p>
+                        <p><strong>what to do:</strong> change your password for these sites right away. 
+                        also, make sure you don’t use the same password anywhere else.</p>
                     `;
                 } else if (result.status === 'not pwned') {
-                    // Email not found in breaches
+                    // this means the email was not found in any breach
                     breachFeedbackDiv.innerHTML = `
-                        <span style='color:#34D399; font-weight:bold;'>Good news! This email was NOT found in any known breaches.</span>
-                        <p><strong>Action:</strong> Great! But always use strong, unique passwords and enable two-factor authentication where possible.</p>
+                        <span style='color:#34D399; font-weight:bold;'>good news! this email wasn’t found in any known breaches.</span>
+                        <p><strong>still a tip:</strong> keep using strong, unique passwords 
+                        and turn on two‑factor authentication if you can. staying safe is better than being sorry.</p>
                     `;
                 } else {
-                    // Unexpected successful response format
-                    console.error("Unexpected backend response format:", result);
-                    breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>An unexpected issue occurred. Please try again later.</span>";
+                    // this is a fallback in case the server sends something unexpected
+                    console.error("unexpected response from server:", result);
+                    breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>something went wrong. please try again later.</span>";
                 }
-            } else { // Status code is not 2xx (error from backend)
-                console.error("Backend error:", result.error);
-                let errorMessage = result.error || "An error occurred while checking the email.";
-                let errorColor = "#FF6B6B"; // Default error color
+            } else {
+                // if the server responded but with an error (for example, 500 or 404)
+                console.error("server error:", result.error);
+                let errorMessage = result.error || "something went wrong while checking the email.";
+                let errorColor = "#FF6B6B"; // red for general errors
 
-                if (response.status === 429) { // Rate limit specific message
-                    errorMessage = "Too many checks recently. Please wait a moment and try again.";
-                    errorColor = "#FACC15"; // Yellow for rate limit
+                // if the user checks too many emails too fast, we show a specific message
+                if (response.status === 429) { 
+                    errorMessage = "too many checks in a short time. wait a bit and try again.";
+                    errorColor = "#FACC15"; // yellow instead of red to show it’s not a critical error
                 }
 
-                breachFeedbackDiv.innerHTML = `<span style='color:${errorColor}; font-weight:bold;'>Error:</span> ${errorMessage}`;
+                breachFeedbackDiv.innerHTML = `<span style='color:${errorColor}; font-weight:bold;'>error:</span> ${errorMessage}`;
             }
         } catch (error) {
-            console.error('Fetch error:', error);
-            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>Could not connect to the server. Please try again later.</span>";
+            // if the fetch itself fails (like no internet or server down)
+            console.error('could not reach the server:', error);
+            breachFeedbackDiv.innerHTML = "<span style='color:#FF6B6B; font-weight:bold;'>could not connect to the server. please try again later.</span>";
         }
     }
 });

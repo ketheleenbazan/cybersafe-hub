@@ -1,0 +1,83 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- HTML5 document declaration -->
+<html lang="en"> <!-- sets main language of the page to English -->
+<head>
+    <meta charset="UTF-8"> <!-- ensures characters (like accents) display correctly -->
+    <title>Sign Up - CyberSafe Hub</title> <!-- text in the browser tab -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- linking the main CSS file where all styles are -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar with only Home button -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="static/images/logo-index.png" alt="CyberSafe Hub Logo" class="navbar-logo">
+            <a href="index.html" class="site-title">CyberSafe Hub</a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <p class="flash-{{ category }}">
+                {{ msg }}
+              </p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      
+  
+    <div class="signup-container"> <!-- wrapper to center and style the signup box -->
+        <h1 class="signup-title">Sign Up</h1> <!-- big heading for the page -->
+        <!-- signup form: sends info to /signup with POST -->
+        <form class="signup-form" method="POST" action="/signup">
+            
+            <!-- Name field -->
+            <label for="name" class="signup-label">Name:</label>
+            <input type="text" id="name" name="name" class="signup-input" required>
+            
+            <!-- Surname field -->
+            <label for="surname" class="signup-label">Surname:</label>
+            <input type="text" id="surname" name="surname" class="signup-input" required>
+            
+            <!-- User type dropdown -->
+            <label for="user_type" class="signup-label">User Type:</label>
+            <select id="user_type" name="user_type" class="signup-select" required>
+                <option value="student">Student</option>
+                <option value="professional">Professional</option>
+                <option value="normal">Normal User</option>
+            </select>
+
+            <!-- Email field -->
+            <label for="email" class="signup-label">Email:</label>
+            <input type="email" id="email" name="email" class="signup-input" required>
+            
+            <!-- Password field -->
+            <label for="password" class="signup-label">Password:</label>
+            <input type="password" id="password" name="password" class="signup-input" required>
+            
+            <!-- Submit button -->
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+
+        <!-- link to login page for users who already signed up -->
+        <p class="signup-text">
+            Already have an account? 
+            <a href="/login" class="signup-link">Log in</a>
+        </p>
+    </div>
+</body>
+</html>

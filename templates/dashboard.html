@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard - CyberSafe Hub</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+      .dashboard-title {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <img
+          src="static/images/logo-index.png"
+          alt="CyberSafe Hub Logo"
+          class="navbar-logo"
+        />
+        <a href="index.html" class="site-title">CyberSafe Hub - My Dashboard</a>
+      </div>
+
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li id="auth-btn-li">
+          <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a> &gt; <span>Phishing Awareness</span>
+    </nav>
+    <div class="dashboard-container">
+      <h1 class="dashboard-title">Welcome, <span id="user-name">User</span></h1>
+      <a href="/logout" class="dashboard-logout">Log out</a>
+
+      <!-- Encrypted Notes Vault Section -->
+      <div class="vault-section-collapsible">
+        <div class="vault-header" id="vault-toggle">
+          <h2>My Encrypted Notes Vault</h2>
+          <span id="vault-arrow" style="font-size: 1.5em; cursor: pointer"
+            >&#9654;</span
+          >
+        </div>
+        <div id="vault-content" style="display: none">
+          <form class="vault-form" id="vault-form">
+            <label for="vault-passphrase">Your Passphrase:</label>
+            <input
+              type="password"
+              id="vault-passphrase"
+              required
+              placeholder="Enter passphrase to decrypt notes"
+            />
+            <label for="note-input">New Note:</label>
+            <input
+              type="text"
+              id="note-input"
+              required
+              placeholder="Type a new note"
+            />
+            <button type="submit">Add Encrypted Note</button>
+          </form>
+          <div
+            id="passphrase-warning"
+            style="color: #ff6b6b; margin-bottom: 10px"
+          ></div>
+          <h3>Your Encrypted Notes</h3>
+          <button
+            id="delete-all-notes"
+            style="
+              background: #ff6b6b;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              padding: 8px 16px;
+              margin-bottom: 16px;
+              cursor: pointer;
+            "
+          >
+            Delete All Notes
+          </button>
+          <div
+            id="notes-progress"
+            style="margin-bottom: 12px; font-weight: 500"
+          ></div>
+          <div id="notes-list"></div>
+        </div>
+      </div>
+
+      <!-- Cipher Playground Section -->
+      <div class="cipher-section-collapsible">
+        <div class="cipher-header" id="cipher-toggle">
+          <h2>My Cipher Playground</h2>
+          <span id="cipher-arrow" style="font-size: 1.5em; cursor: pointer"
+            >&#9654;</span
+          >
+        </div>
+        <div id="cipher-content" style="display: none">
+          <form class="cipher-form" id="cipher-form">
+            <label for="cipher-type">Cipher Type:</label>
+            <select id="cipher-type" required>
+              <option value="caesar">Caesar Cipher</option>
+              <option value="vigenere">Vigenère Cipher</option>
+            </select>
+            <label for="cipher-key"
+              >Key (number for Caesar, word for Vigenère):</label
+            >
+            <input type="text" id="cipher-key" required />
+            <label for="cipher-note-input">New Note:</label>
+            <input
+              type="text"
+              id="cipher-note-input"
+              required
+              placeholder="Type a new note"
+            />
+            <button type="submit">Encrypt & Save Note</button>
+          </form>
+          <h3>Your Cipher Notes</h3>
+          <button
+            id="delete-all-cipher-notes"
+            style="
+              background: #ff6b6b;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              padding: 8px 16px;
+              margin-bottom: 16px;
+              cursor: pointer;
+            "
+          >
+            Delete All Cipher Notes
+          </button>
+          <div
+            id="cipher-notes-progress"
+            style="margin-bottom: 12px; font-weight: 500"
+          ></div>
+          <div id="cipher-notes-list"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Fetch and display user name
+      fetch("/api/user")
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("user-name").textContent =
+            data.name || "User";
+        });
+
+      // --- Encrypted Notes Vault Logic ---
+      function encryptNote(note, passphrase) {
+        return CryptoJS.AES.encrypt(note, passphrase).toString();
+      }
+      function decryptNote(encrypted, passphrase) {
+        try {
+          const bytes = CryptoJS.AES.decrypt(encrypted, passphrase);
+          const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+          return decrypted || null;
+        } catch {
+          return null;
+        }
+      }
+      function renderNotes(notes, passphrase) {
+        const list = document.getElementById("notes-list");
+        const progress = document.getElementById("notes-progress");
+        list.innerHTML = "";
+        progress.textContent = `You have ${notes.length} encrypted note${
+          notes.length === 1 ? "" : "s"
+        }.`;
+        notes.forEach((note) => {
+          const decrypted = decryptNote(note.encrypted_note, passphrase);
+          const div = document.createElement("div");
+          div.className = "note-card";
+          div.innerHTML = `
+                    <div><b>Created:</b> ${new Date(
+                      note.created_at
+                    ).toLocaleString()}</div>
+                    <div class="enc"><b>Encrypted:</b> ${
+                      note.encrypted_note
+                    }</div>
+                    <div class="dec"><b>Decrypted:</b> ${
+                      decrypted
+                        ? decrypted
+                        : '<span class="fail">Wrong passphrase or corrupted note</span>'
+                    }</div>
+                    <button class="delete-note-btn" data-id="${
+                      note.id
+                    }" style="background:#FF6B6B;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-top:8px;cursor:pointer;">Delete</button>
+                `;
+          list.appendChild(div);
+        });
+        document.querySelectorAll(".delete-note-btn").forEach((btn) => {
+          btn.onclick = function () {
+            fetch(`/api/notes/${btn.dataset.id}`, { method: "DELETE" }).then(
+              () => loadNotes()
+            );
+          };
+        });
+      }
+      function loadNotes() {
+        const passphrase = document.getElementById("vault-passphrase").value;
+        fetch("/api/notes")
+          .then((res) => res.json())
+          .then((notes) => renderNotes(notes, passphrase));
+      }
+
+      // --- Cipher Playground Logic (frontend-only ciphers, saved as notes) ---
+      function caesarEncrypt(text, shift) {
+        return text.replace(/[a-z]/gi, (c) =>
+          String.fromCharCode(
+            (c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + (shift % 26))
+              ? c
+              : c - 26
+          )
+        );
+      }
+      function caesarDecrypt(text, shift) {
+        return caesarEncrypt(text, 26 - (shift % 26));
+      }
+      function vigenereEncrypt(text, key) {
+        key = key.toUpperCase();
+        let j = 0;
+        return text.replace(/[a-z]/gi, (c) => {
+          let isUpper = c === c.toUpperCase();
+          let k = key[j++ % key.length].charCodeAt(0) - 65;
+          let base = isUpper ? 65 : 97;
+          return String.fromCharCode(
+            ((c.charCodeAt(0) - base + k) % 26) + base
+          );
+        });
+      }
+      function vigenereDecrypt(text, key) {
+        key = key.toUpperCase();
+        let j = 0;
+        return text.replace(/[a-z]/gi, (c) => {
+          let isUpper = c === c.toUpperCase();
+          let k = key[j++ % key.length].charCodeAt(0) - 65;
+          let base = isUpper ? 65 : 97;
+          return String.fromCharCode(
+            ((c.charCodeAt(0) - base - k + 26) % 26) + base
+          );
+        });
+      }
+      function cipherEncrypt(note, cipher, key) {
+        if (cipher === "caesar") return caesarEncrypt(note, parseInt(key));
+        if (cipher === "vigenere") return vigenereEncrypt(note, key);
+        return note;
+      }
+      function cipherDecrypt(encrypted, cipher, key) {
+        if (cipher === "caesar") return caesarDecrypt(encrypted, parseInt(key));
+        if (cipher === "vigenere") return vigenereDecrypt(encrypted, key);
+        return encrypted;
+      }
+      function renderCipherNotes(notes, cipher, key) {
+        const list = document.getElementById("cipher-notes-list");
+        const progress = document.getElementById("cipher-notes-progress");
+        list.innerHTML = "";
+        progress.textContent = `You have ${notes.length} cipher note${
+          notes.length === 1 ? "" : "s"
+        }.`;
+        notes.forEach((note) => {
+          const decrypted = cipherDecrypt(note.encrypted_note, cipher, key);
+          const div = document.createElement("div");
+          div.className = "cipher-note-card";
+          div.innerHTML = `
+                    <div><b>Created:</b> ${new Date(
+                      note.created_at
+                    ).toLocaleString()}</div>
+                    <div class="enc"><b>Encrypted:</b> ${
+                      note.encrypted_note
+                    }</div>
+                    <div class="dec"><b>Decrypted:</b> ${
+                      decrypted
+                        ? decrypted
+                        : '<span class="fail">Wrong key or corrupted note</span>'
+                    }</div>
+                    <button class="delete-cipher-note-btn" data-id="${
+                      note.id
+                    }" style="background:#FF6B6B;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-top:8px;cursor:pointer;">Delete</button>
+                `;
+          list.appendChild(div);
+        });
+        document.querySelectorAll(".delete-cipher-note-btn").forEach((btn) => {
+          btn.onclick = function () {
+            fetch(`/api/notes/${btn.dataset.id}`, { method: "DELETE" }).then(
+              () => loadCipherNotes()
+            );
+          };
+        });
+      }
+      function loadCipherNotes() {
+        const cipher = document.getElementById("cipher-type").value;
+        const key = document.getElementById("cipher-key").value;
+        fetch("/api/notes")
+          .then((res) => res.json())
+          .then((notes) => renderCipherNotes(notes, cipher, key));
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Collapsible vault
+        const vaultToggle = document.getElementById("vault-toggle");
+        const vaultContent = document.getElementById("vault-content");
+        const vaultArrow = document.getElementById("vault-arrow");
+        let vaultExpanded = false;
+        vaultToggle.addEventListener("click", function () {
+          vaultExpanded = !vaultExpanded;
+          vaultContent.style.display = vaultExpanded ? "block" : "none";
+          vaultArrow.innerHTML = vaultExpanded ? "&#9660;" : "&#9654;";
+        });
+
+        // Collapsible cipher
+        const cipherToggle = document.getElementById("cipher-toggle");
+        const cipherContent = document.getElementById("cipher-content");
+        const cipherArrow = document.getElementById("cipher-arrow");
+        let cipherExpanded = false;
+        cipherToggle.addEventListener("click", function () {
+          cipherExpanded = !cipherExpanded;
+          cipherContent.style.display = cipherExpanded ? "block" : "none";
+          cipherArrow.innerHTML = cipherExpanded ? "&#9660;" : "&#9654;";
+        });
+
+        // Vault logic
+        const passInput = document.getElementById("vault-passphrase");
+        const noteInput = document.getElementById("note-input");
+        const form = document.getElementById("vault-form");
+        const warning = document.getElementById("passphrase-warning");
+        passInput.addEventListener("input", loadNotes);
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const passphrase = passInput.value;
+          const note = noteInput.value.trim();
+          if (!passphrase) {
+            warning.textContent = "Enter a passphrase before adding a note!";
+            return;
+          }
+          if (!note) return;
+          const encrypted = encryptNote(note, passphrase);
+          fetch("/api/notes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ encrypted_note: encrypted }),
+          }).then(() => {
+            noteInput.value = "";
+            loadNotes();
+          });
+        });
+        document
+          .getElementById("delete-all-notes")
+          .addEventListener("click", function () {
+            if (
+              confirm(
+                "Are you sure you want to delete ALL your notes? This cannot be undone."
+              )
+            ) {
+              fetch("/api/notes/delete_all", { method: "DELETE" })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.success) {
+                    loadNotes();
+                  }
+                });
+            }
+          });
+        loadNotes();
+
+        // Cipher logic
+        const cipherForm = document.getElementById("cipher-form");
+        cipherForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const cipher = document.getElementById("cipher-type").value;
+          const key = document.getElementById("cipher-key").value;
+          const note = document
+            .getElementById("cipher-note-input")
+            .value.trim();
+          if (!note || !key) return;
+          const encrypted = cipherEncrypt(note, cipher, key);
+          fetch("/api/notes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ encrypted_note: encrypted }),
+          }).then(() => {
+            document.getElementById("cipher-note-input").value = "";
+            loadCipherNotes();
+          });
+        });
+        document
+          .getElementById("cipher-type")
+          .addEventListener("change", loadCipherNotes);
+        document
+          .getElementById("cipher-key")
+          .addEventListener("input", loadCipherNotes);
+        document
+          .getElementById("delete-all-cipher-notes")
+          .addEventListener("click", function () {
+            if (
+              confirm(
+                "Are you sure you want to delete ALL your cipher notes? This cannot be undone."
+              )
+            ) {
+              fetch("/api/notes/delete_all", { method: "DELETE" })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.success) {
+                    loadCipherNotes();
+                  }
+                });
+            }
+          });
+        loadCipherNotes();
+      });
+    </script>
+    <script src="static/js/main.js"></script>
+  </body>
+</html>

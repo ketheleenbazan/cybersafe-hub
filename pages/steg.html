@@ -1,0 +1,118 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- HTML5 declaration -->
+<html lang="en"> <!-- language of the page set to English -->
+<head>
+  <meta charset="UTF-8"> <!-- make sure all symbols/letters display correctly -->
+  <title>Steganography Tool</title> <!-- text that shows in the browser tab -->
+
+  <!-- quick inline CSS for page styling -->
+  <style>
+    body { font-family: sans-serif; margin: 2em; } /* clean font and margin around page */
+    input, textarea { margin: 0.5em 0; width: 100%; } /* space out inputs and make them full width */
+    img { max-width: 300px; margin-top: 1em; } /* limit image size and add space */
+    .section { margin-bottom: 2em; } /* add space between sections */
+  </style>
+</head>
+<body>
+  <h1>🧩 Steganography Tool</h1> <!-- main page heading with a puzzle piece emoji for fun -->
+
+  <!-- Section for hiding a secret message inside an image -->
+  <div class="section">
+    <h2>Encode Message</h2>
+    <form id="encodeForm">
+      <input type="file" id="encodeImage" accept="image/*" required><br>
+      <!-- user selects an image to hide the message in -->
+      <textarea id="encodeMessage" placeholder="Message to hide" required></textarea><br>
+      <!-- user types the message to hide -->
+      <!-- <input type="text" id="encodePass" placeholder="Passphrase (optional)"> -->
+      <!-- optional passphrase for extra protection (currently commented out) -->
+      <button type="submit">Hide Message</button>
+      <!-- button to start encoding -->
+    </form>
+    <div id="encodeResult"></div>
+    <!-- result (the new image) will show up here -->
+  </div>
+
+  <!-- Section for extracting a hidden message from an image -->
+  <div class="section">
+    <h2>Decode Message</h2>
+    <form id="decodeForm">
+      <input type="file" id="decodeImage" accept="image/*" required><br>
+      <!-- user uploads the stego image here -->
+      <!-- <input type="text" id="decodePass" placeholder="Passphrase (optional)"> -->
+      <!-- optional passphrase if encoding required it -->
+      <button type="submit">Reveal Message</button>
+      <!-- button to start decoding -->
+    </form>
+    <div id="decodeResult"></div>
+    <!-- extracted hidden message will display here -->
+  </div>
+
+  <script>
+  // --- ENCODE FUNCTION ---
+  document.getElementById('encodeForm').onsubmit = async function(e) {
+    e.preventDefault(); // stops page from refreshing on form submit
+    const image = document.getElementById('encodeImage').files[0]; // get the selected image file
+    const message = document.getElementById('encodeMessage').value; // get the typed message
+
+    // build form data to send to backend
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('message', message);
+
+    // send request to backend /api/steg/encode
+    const res = await fetch('/api/steg/encode', { method: 'POST', body: formData });
+    const data = await res.json(); // parse the response as JSON
+    const resultDiv = document.getElementById('encodeResult');
+
+    if (data.stego_image) {
+      // backend returned a stego image in base64
+      const imgDataUrl = `data:image/png;base64,${data.stego_image}`;
+      resultDiv.innerHTML = `
+        <p>Stego Image (right-click to save or use the button):</p>
+        <img src="${imgDataUrl}">
+        <br>
+        <a id="downloadStego" href="${imgDataUrl}" download="stego_image.png">
+          <button type="button">Download Stego Image</button>
+        </a>
+        <p><i>You can now upload this image in the "Decode" section to reveal the hidden message.</i></p>
+      `;
+    } else {
+      // error message if encoding failed
+      resultDiv.textContent = data.error || 'Error encoding image';
+    }
+  };
+
+  // --- DECODE FUNCTION ---
+  document.getElementById('decodeForm').onsubmit = async function(e) {
+    e.preventDefault(); // stops default form refresh
+    const image = document.getElementById('decodeImage').files[0]; // get uploaded stego image
+
+    // build form data
+    const formData = new FormData();
+    formData.append('image', image);
+
+    // send request to backend /api/steg/decode
+    const res = await fetch('/api/steg/decode', { method: 'POST', body: formData });
+    const data = await res.json();
+    const resultDiv = document.getElementById('decodeResult');
+
+    if (data.message) {
+      // if a hidden message was found
+      resultDiv.innerHTML = `<b>Hidden message:</b> <pre>${data.message}</pre>`;
+    } else {
+      // if nothing found or error
+      resultDiv.textContent = data.error || 'No message found';
+    }
+  };
+  </script>
+</body>
+</html>

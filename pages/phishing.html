@@ -1,0 +1,100 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- tells browser we're using HTML5 -->
+<html lang="en"> <!-- HTML starts, page language = English -->
+<head> <!-- head = info for the browser, not directly shown -->
+    <meta charset="UTF-8"> <!-- makes sure all characters (letters, numbers, symbols) display correctly -->
+    <title>Phishing Awareness Game - CyberSafe Hub</title> <!-- text shown in the browser tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- makes the page mobile-friendly, scaling it properly in small screens -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon-phishing.ico">
+    <!-- favicon = the tiny icon in the browser tab -->
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" 
+        rel="stylesheet">
+    <!-- pulling in Montserrat + Poppins fonts from Google so the text looks clean -->
+    <link rel="stylesheet" href="static/css/style.css"> <!-- your main CSS file -->
+</head>
+<body> <!-- body = everything the user sees on the page -->
+    <header> <!-- site header area -->
+        <nav class="navbar"> <!-- top navigation bar -->
+            <div class="navbar-brand"> <!-- site logo + title grouped together -->
+                <img src="static/images/phishing-icon.png" alt="CyberSafe Hub Logo" class="navbar-logo"> 
+                <!-- logo for the phishing page -->
+                <a href="index.html" class="site-title">CyberSafe Hub</a> 
+                <!-- site name with link back to homepage -->
+            </div>
+            
+            <ul class="navbar-menu"> <!-- menu links -->
+                <li><a href="index.html">Home</a></li> <!-- link back to homepage -->
+                <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown menu for Cyber Lab -->
+                    <button class="dropbtn" id="cyberlab-dropbtn">
+                      Cyber Lab &#x25BC;
+                    </button> <!-- button that opens the dropdown (arrow ▼ added with unicode) -->
+                    <div class="dropdown-content" id="cyberlab-dropdown-content"> 
+                        <!-- hidden dropdown links that appear when clicked -->
+                        <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+                        <!-- placeholder links commented out for now -->
+                        <!-- <a href="url-reporter.html">Suspicious URL Reporter</a>
+                        <a href="steganography.html">Steganography Tool</a> -->
+                        <a href="cipher-playground.html">Custom Cipher Playground</a>
+                        <a href="threat-library.html">Threat Library</a>
+                    </div>
+                  </li>
+                </li>
+                <li><a href="password.html">Password Checker</a></li>
+                <li><a class="active">Phishing Awareness</a></li> 
+                <!-- active = highlights this menu item since we’re on the phishing page, therefore, not clickable -->
+                <li><a href="url-checker.html">URL Detector</a></li>
+                <li><a href="breach-checker.html">Breach Checker</a></li>
+                <li><a href="quiz.html">Quiz Game</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="auth-btn-li">
+                    <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a> 
+                    <!-- login button (later could swapped for logout if user is logged in) -->
+                </li>
+            </ul>
+        </nav>
+        <nav class="breadcrumb"> 
+            <!-- breadcrumb = shows user’s path, useful for navigation -->
+            <a href="index.html">Home</a> &gt; <span>Phishing Awareness</span>
+            <!-- &gt; gives us the ">" character -->
+        </nav>
+    </header>
+    <img src="static/images/banner-phishing.png" alt="CyberSafe Hub Banner" class="banner-img"> 
+    <!-- banner image across the top, specific for this phishing page -->
+    
+    <main> <!-- main page content -->
+        <h2>Phishing Email Game</h2> <!-- heading for this section -->
+        <p>
+            Read each email below and decide: Is it a phishing attempt or not? 
+            Click your answer to get instant feedback!
+        </p>
+        <!-- short intro telling users how the game works -->
+
+        <div id="phishing-game-container">
+            <!-- JS will generate the phishing game here (dynamic content goes inside) -->
+        </div>
+
+        <div id="phishing-score"></div> 
+        <!-- place where the score or progress will show after answers -->
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CyberSafe Hub</p> <!-- footer text -->
+    </footer>
+
+    <!-- JS files: load the phishing game code first, then main site JS -->
+    <script src="static/js/phishing-game.js"></script> 
+    <!-- this file will actually create the game in #phishing-game-container -->
+    <script src="static/js/main.js"></script> 
+    <!-- main JS for site-wide functionality (like dropdown menus) -->
+</body>
+</html>

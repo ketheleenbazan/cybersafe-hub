@@ -1,0 +1,157 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- tells browser this is an HTML5 document -->
+<html lang="en"> <!-- language set to English -->
+  <head>
+    <meta charset="UTF-8" /> <!-- makes sure text + symbols display correctly -->
+    <title>Custom Cipher Playground</title> <!-- shows in the browser tab -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport meta makes site scale properly on phones/tablets -->
+
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="static/images/favicon.ico"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- pulling Montserrat + Poppins for clean looking text -->
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="static/css/style.css" />
+
+    <!-- inline CSS just for this page -->
+    <style>
+      .cipher-explanation {
+        background: #fff; /* white background card */
+        color: #222; /* dark text for readability */
+        border-radius: 10px; /* rounded corners */
+        padding: 32px; /* space inside the box */
+        margin: 48px auto; /* margin around the box, centered */
+        max-width: 600px; /* keep card at a nice width */
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); /* subtle shadow for depth */
+      }
+      .cipher-explanation h1 {
+        color: #007bff; /* blue heading to match theme */
+      }
+      .cipher-explanation a {
+        color: #007bff; /* make links stand out in blue */
+        font-weight: bold; /* bold for emphasis */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"> <!-- top navbar -->
+        <div class="navbar-brand">
+          <img
+            src="static/images/logo-index.png"
+            alt="CyberSafe Hub Logo"
+            class="navbar-logo"
+          />
+          <a href="index.html" class="site-title">CyberSafe Hub</a>
+        </div>
+        <ul class="navbar-menu"> <!-- nav menu -->
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown -->
+            <button class="dropbtn" id="cyberlab-dropbtn">
+              Cyber Lab &#x25BC;
+            </button>
+            <div class="dropdown-content" id="cyberlab-dropdown-content">
+              <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+              <a class="active">Custom Cipher Playground</a> <!-- active = current page -->
+              <a href="threat-library.html">Threat Library</a>
+            </div>
+          </li>
+          <li><a href="password.html">Password Checker</a></li>
+          <li><a href="phishing.html">Phishing Awareness</a></li>
+          <li><a href="url-checker.html">URL Detector</a></li>
+          <li><a href="breach-checker.html">Breach Checker</a></li>
+          <li><a href="quiz.html">Quiz Game</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li id="auth-btn-li">
+            <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="cipher-explanation"> <!-- main card for explanation -->
+        <h1>Custom Cipher Playground</h1>
+        <p>
+          This tool lets you experiment with classic ciphers like
+          <b>Caesar</b> and <b>Vigenère</b>!<br />
+          You can encrypt and decrypt your own messages, see how the ciphers work,
+          and learn about the basics of cryptography.
+        </p>
+        <ul>
+          <li>
+            <b>Caesar Cipher:</b> Shifts each letter by a number you choose.
+          </li>
+          <li>
+            <b>Vigenère Cipher:</b> Uses a word as a repeating key to shift
+            letters.
+          </li>
+        </ul>
+        <p>
+          <b>Want to try it out and save your progress?</b><br />
+          <a href="/dashboard">Log in to your dashboard</a> to access the
+          interactive Cipher Playground and save your encrypted notes!
+        </p>
+      </div>
+
+      <!-- commented out section (maybe for later interactive expansion not sure) -->
+      <!-- 
+      <div class="vault-section-collapsible">
+        <div class="vault-header" id="cipher-toggle">
+          <h2>My Cipher Playground</h2>
+          <span id="cipher-arrow" style="font-size: 1.5em; cursor: pointer">
+            &#9654;
+          </span>
+        </div>
+        <div id="cipher-content" style="display: none">
+        </div>
+      </div>
+      -->
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CyberSafe Hub</p>
+    </footer>
+
+    <!-- site-wide JS -->
+    <script src="static/js/main.js"></script>
+
+    <script>
+      // Dropdown toggle logic
+      document.addEventListener("DOMContentLoaded", function () {
+        var dropdown = document.getElementById("cyberlab-dropdown");
+        var btn = document.getElementById("cyberlab-dropbtn");
+        
+        // when button is clicked, show/hide the dropdown menu
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation(); // stops event from bubbling up (so clicking body won't close instantly)
+          dropdown.classList.toggle("open"); // toggles the "open" class
+        });
+        
+        // clicking anywhere outside closes the dropdown
+        document.addEventListener("click", function () {
+          dropdown.classList.remove("open");
+        });
+      });
+    </script>
+  </body>
+</html>

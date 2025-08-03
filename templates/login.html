@@ -1,0 +1,60 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In - CyberSafe Hub</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar with only Home button -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="static/images/logo-index.png" alt="CyberSafe Hub Logo" class="navbar-logo">
+            <a href="index.html" class="site-title">CyberSafe Hub</a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- Flash messages ABOVE the login box -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <p class="flash-{{ category }}">
+                {{ msg }}
+              </p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="login-container">
+        <h1 class="login-title">Log In</h1>
+        <form class="login-form" method="POST" action="/login">
+            <label for="email" class="login-label">Email:</label>
+            <input type="email" id="email" name="email" class="login-input" required>
+            
+            <label for="password" class="login-label">Password:</label>
+            <input type="password" id="password" name="password" class="login-input" required>
+            
+            <button type="submit" class="login-button">Log In</button>
+        </form>
+        <p class="login-text">
+            Don't have an account? 
+            <a href="/signup" class="login-link">Sign up</a>
+        </p>
+    </div>
+</body>
+</html>

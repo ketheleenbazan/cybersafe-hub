@@ -1,0 +1,616 @@
+<!-- 
+** CYBERSAFE-HUB 
+**
+** FINAL PROJECT - Cyber Security - BSC in Computing - NCI - Year 4
+** Student Number: x21102252
+** Name: Ketheleen Silva
+** 
+-->
+
+<!DOCTYPE html> <!-- HTML5 document declaration -->
+<html lang="en"> <!-- sets page language to English -->
+  <head>
+    <meta charset="UTF-8" /> <!-- makes sure text/symbols display correctly -->
+    <title>Threat Library - CyberSafe Hub</title> <!-- page title (browser tab) -->
+
+    <!-- favicon (small icon on browser tab) -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+
+    <!-- responsive layout so page looks good on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google fonts for clean text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- link to the main CSS file -->
+    <link rel="stylesheet" href="static/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"> <!-- main navigation bar -->
+        <div class="navbar-brand">
+          <img
+            src="static/images/logo-index.png"
+            alt="CyberSafe Hub Logo"
+            class="navbar-logo"
+          />
+          <a href="index.html" class="site-title">CyberSafe Hub</a>
+        </div>
+        <ul class="navbar-menu"> <!-- navigation menu items -->
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown" id="cyberlab-dropdown"> <!-- dropdown for Cyber Lab -->
+            <button class="dropbtn" id="cyberlab-dropbtn">
+              Cyber Lab &#x25BC;
+            </button>
+            <div class="dropdown-content" id="cyberlab-dropdown-content">
+                <a href="encrypted-notes.html">Encrypted Notes Vault</a>
+                <!-- <a href="url-reporter.html">Suspicious URL Reporter</a>
+                <a href="steganography.html">Steganography Tool</a> -->
+                <a href="cipher-playground.html">Custom Cipher Playground</a>
+                <a class="active">Threat Library</a>
+              </div>
+          </li>
+          <li><a href="password.html">Password Checker</a></li>
+          <li><a href="phishing.html">Phishing Awareness</a></li>
+          <li><a href="url-checker.html">URL Detector</a></li>
+          <li><a href="breach-checker.html">Breach Checker</a></li>
+          <li><a href="quiz.html">Quiz Game</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li id="auth-btn-li">
+            <a href="/login" id="auth-btn" class="navbar-auth-btn">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- banner image across the page -->
+    <img
+      src="static/images/banner.png"
+      alt="CyberSafe Hub Banner"
+      class="banner-img"
+    />
+
+    <main>
+      <h2>Cyber Threat Library</h2>
+      <p>Learn about the most common cyber threats and how to protect yourself.</p>
+      <div class="feature-accordion">
+        <!-- Phishing -->
+        <div class="feature-item">
+          <div class="feature-header">
+            <img src="static/images/phishing-library.png" alt="Phishing" class="topic-img" />
+            <span class="feature-title">Phishing</span>
+            <span class="feature-arrow">&#x25BC;</span>
+          </div>
+          <div class="feature-content">
+            <p><strong>What is Phishing?</strong></p>
+            <p>
+              Phishing is a type of online scam where cybercriminals pretend to be 
+              trusted people or companies (like your bank, a delivery service, or even your boss) 
+              to trick you into sharing private information. This information can include 
+              things like your usernames, passwords, credit card numbers, or even personal 
+              details such as your date of birth or address. 
+            </p>
+            <p>
+              These attackers usually reach out to you through emails, text messages, 
+              phone calls, or even fake websites that look very real. Their main goal 
+              is to steal your information so they can use it for things like stealing 
+              your money, hacking into your accounts, or committing identity theft.
+            </p>
+          
+            <p><strong>How to Recognize a Phishing Attempt:</strong></p>
+            <ul>
+              <li><strong>Strange email addresses:</strong> The sender’s address may look 
+                  similar to a real one, but it usually has extra numbers, letters, or 
+                  spelling mistakes (for example: support@paypa1.com instead of paypal.com).</li>
+              <li><strong>Scary or urgent messages:</strong> The message may say things like 
+                  “Your account will be locked today!” or “Act now to avoid losing access.” 
+                  This is to make you panic and click without thinking.</li>
+              <li><strong>Requests for personal details:</strong> No real company will ask 
+                  you to send your password, PIN, or credit card number through email or text.</li>
+              <li><strong>Suspicious links:</strong> The email may ask you to click a link 
+                  that looks official but actually takes you to a fake website. When you 
+                  hover your mouse over the link (without clicking), you may notice the 
+                  web address looks unusual or misspelled.</li>
+              <li><strong>Attachments you weren’t expecting:</strong> A random file may 
+                  contain malware (harmful software) if you download and open it.</li>
+            </ul>
+          
+            <p><strong>How to Protect Yourself:</strong></p>
+            <ul>
+              <li><strong>Think before you click:</strong> Never click on links or 
+                  download files from suspicious emails or messages.</li>
+              <li><strong>Double-check the sender:</strong> Look carefully at the email 
+                  address or phone number. If something feels off, contact the company 
+                  directly using their official website or phone number.</li>
+              <li><strong>Use Two-Factor Authentication (2FA):</strong> This adds an 
+                  extra step when logging into your accounts (like entering a code sent 
+                  to your phone). Even if a hacker gets your password, they still can’t 
+                  get in easily.</li>
+              <li><strong>Keep your software updated:</strong> Make sure your phone, 
+                  computer, and apps always have the latest security updates installed.</li>
+              <li><strong>Report phishing attempts:</strong> If you receive a suspicious 
+                  message, report it to the company being impersonated and delete it. 
+                  Most email services also let you mark the message as "Phishing".</li>
+            </ul>
+          
+            <p><b>
+              Remember: if a message seems unusual, too good to be true, or tries to 
+              scare you into acting fast, i'’s probably a phishing attempt.
+            </b></p>
+          
+            <div class="gif-placeholder">
+                <img src="static/images/VirusCybersecurity-GIF.gif" alt="Phishing Demo GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW5ucG5jY2M5azlhb2ZxcTh4bWdyNnZhdWVvM21xODJ5eWFzNTRjaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/B8TuiIwErdaxVFTXnd/giphy.gif
+                        - https://linktr.ee/emileappeal
+                -->
+              </div>
+              
+            
+          </div>          
+        </div>
+        <div class="feature-item">
+            <div class="feature-header">
+              <img src="static/images/ransomware-library.png" alt="Ransomware" class="topic-img" />
+              <span class="feature-title">Ransomware</span>
+              <span class="feature-arrow">&#x25BC;</span>
+            </div>
+            <div class="feature-content">
+              <p><strong>What is Ransomware?</strong></p>
+              <p>
+                Ransomware is a type of harmful software (malware) that locks you out of your 
+                computer or files. Once your files are locked, you can’t open or use them 
+                without a special "key." The criminals behind the attack then demand that 
+                you pay them money (called a <em>ransom</em>) to get the key and unlock your files. 
+              </p>
+              <p>
+                These payments are usually asked for in cryptocurrencies (like Bitcoin) 
+                so they can’t be traced easily. Even if you pay, there’s no guarantee 
+                the attackers will actually unlock your files — many victims pay and 
+                never get their data back.
+              </p>
+          
+              <p><strong>How to Recognize a Ransomware Attack:</strong></p>
+              <ul>
+                <li><strong>Sudden inability to access files:</strong> Files that were 
+                    working fine before may suddenly show errors, be renamed with 
+                    strange extensions (like <code>.locked</code>), or become completely 
+                    unreadable.</li>
+                <li><strong>A ransom note appears:</strong> A pop-up message or a 
+                    text/HTML file may appear on your screen telling you your files are 
+                    locked. It usually demands payment and gives instructions on how to pay.</li>
+                <li><strong>Threats to scare you:</strong> The message may say your 
+                    files will be deleted, published online, or made permanentely 
+                    inaccessible if you don’t pay within a short time limit.</li>
+                <li><strong>Computer running strangely:</strong> Your system may slow down, 
+                    crash, or show unusual error messages after the infection.</li>
+              </ul>
+          
+              <p><strong>How to Protect Yourself from Ransomware:</strong></p>
+              <ul>
+                <li><strong>Back up your files regularly:</strong> Keep copies of your 
+                    important data on an external drive or cloud service. If your 
+                    computer is infected, you can restore your files from the backup.</li>
+                <li><strong>Update your software:</strong> Make sure your operating 
+                    system, apps, and antivirus software are always up to date. Updates 
+                    often fix security holes that attackers try to exploit.</li>
+                <li><strong>Avoid suspicious downloads:</strong> Don’t download files 
+                    from unknown websites or click links in random emails. These are 
+                    common ways ransomware spreads.</li>
+                <li><strong>Be careful with email attachments:</strong> Even if the 
+                    email looks like it’s from someone you know, double-check before 
+                    opening attachments — especially if you weren’t expecting them.</li>
+                <li><strong>Use trusted security software:</strong> A good antivirus 
+                    or anti-malware program can detect and block ransomware before 
+                    it can do damage.</li>
+                <li><strong>Think twice before enabling macros:</strong> Some ransomware 
+                    hides in Word or Excel documents that ask you to "enable macros." 
+                    Never do this unless you’re 100% sure the file is safe.</li>
+              </ul>
+          
+              <p>
+                Remember: once ransomware locks your files, recovering them is very hard. 
+                Prevention is the best protection — stay alert and back up your data often.
+              </p>
+          
+              <div class="gif-placeholder">
+                <img src="static/images/ransomware.gif" alt="Ransomware GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://giphy.com/gifs/hacker-thief-ransomware-XdSWmBhkQVCotKL217
+                        - https://linktr.ee/emileappeal
+                -->
+              </div>
+            </div>
+          </div>
+          
+        <!-- Malware -->
+        <div class="feature-item">
+            <div class="feature-header">
+              <img src="static/images/malware-library.png" alt="Malware" class="topic-img" />
+              <span class="feature-title">Malware</span>
+              <span class="feature-arrow">&#x25BC;</span>
+            </div>
+            <div class="feature-content">
+              <p><strong>What is Malware?</strong></p>
+              <p>
+                Malware (short for <em>malicious software</em>) is any type of harmful 
+                program created to damage, steal from, or take control of your computer, 
+                phone, or network. Unlike normal software that helps you, malware is made 
+                to harm you or your device. 
+              </p>
+              <p>
+                There are many different types of malware, such as:
+              </p>
+              <ul>
+                <li><strong>Viruses:</strong> Programs that spread by attaching 
+                    themselves to files and can damage or delete data.</li>
+                <li><strong>Worms:</strong> Malware that spreads on its own through 
+                    networks without needing you to click anything.</li>
+                <li><strong>Trojans:</strong> Programs that pretend to be safe or 
+                    useful but secretly cause harm once installed.</li>
+                <li><strong>Spyware:</strong> Software that secretly monitors your 
+                    activity and sends your personal data to hackers.</li>
+                <li><strong>Adware:</strong> Unwanted programs that flood your device 
+                    with pop-up ads, often slowing it down.</li>
+                <li><strong>Ransomware:</strong> A type of malware that locks your files 
+                    and demands payment to unlock them.</li>
+              </ul>
+          
+              <p><strong>How to Recognize a Malware Infection:</strong></p>
+              <ul>
+                <li><strong>Slower performance:</strong> Your computer or phone suddenly 
+                    becomes much slower than usual.</li>
+                <li><strong>Unexpected pop-ups or ads:</strong> You see lots of strange 
+                    messages or ads, even when you aren’t browsing the internet.</li>
+                <li><strong>Programs behaving oddly:</strong> Apps might open, close, 
+                    or crash without you doing anything.</li>
+                <li><strong>Unauthorized access:</strong> Files may disappear, 
+                    move around, or be changed without your knowledge.</li>
+                <li><strong>Strange network activity:</strong> Your internet might feel 
+                    unusually busy even when you aren’t using it, as malware may be 
+                    sending information in the background.</li>
+                <li><strong>Battery draining fast (for phones):</strong> Malware running 
+                    secretly can use up your phone’s battery much faster than normal.</li>
+              </ul>
+          
+              <p><strong>How to Protect Yourself from Malware:</strong></p>
+              <ul>
+                <li><strong>Use trusted antivirus software:</strong> A good security 
+                    program can detect and remove malware before it causes serious damage.</li>
+                <li><strong>Keep your system updated:</strong> Regular updates fix 
+                    weaknesses in your operating system and apps that hackers might exploit.</li>
+                <li><strong>Avoid suspicious links and downloads:</strong> Don’t click 
+                    unknown links or download files from emails, texts, or websites 
+                    you don’t trust.</li>
+                <li><strong>Be careful with free software:</strong> Some “free” apps 
+                    can come bundled with hidden malware. Only download from official 
+                    app stores or trusted sites.</li>
+                <li><strong>Check before plugging in USB drives:</strong> Hackers can 
+                    use infected USB drives to spread malware to your computer.</li>
+                <li><strong>Use a firewall:</strong> Firewalls help block unauthorized 
+                    access to your system over the internet.</li>
+              </ul>
+          
+              <p>
+                Remember: Malware can sneak onto your device without you even noticing. 
+                Staying cautious and keeping your software updated is the best defense.
+              </p>
+          
+              <div class="gif-placeholder">
+                <img src="static/images/malware.gif" alt="Malware GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDE1eGpuYm5rcWJ1M2kyZ2lrendpdXNyMWhvcHczanY4NHNjZ3kzMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/I0e4u216Qhww8eRTVq/giphy.gif
+                        - https://linktr.ee/emileappeal
+                -->
+              </div>
+            </div>
+          </div>
+          
+
+        <!-- Social Engineering -->
+        <div class="feature-item">
+            <div class="feature-header">
+              <img src="static/images/social-engineering-library.png" alt="Social Engineering" class="topic-img" />
+              <span class="feature-title">Social Engineering</span>
+              <span class="feature-arrow">&#x25BC;</span>
+            </div>
+            <div class="feature-content">
+              <p><strong>What is Social Engineering?</strong></p>
+              <p>
+                Social engineering is a trick used by cybercriminals to get you to 
+                share private or sensitive information. Instead of breaking into 
+                your computer with software, they try to <em>manipulate you as a person</em> 
+                into giving them access. They often pretend to be someone you trust, 
+                such as a bank worker, a company employee, or even a friend, to get 
+                you to reveal details like your passwords, banking information, or 
+                personal data.
+              </p>
+              <p>
+                Social engineering attacks can happen through emails, phone calls, 
+                text messages, or even in person. The attackers rely on human 
+                emotions like fear, trust, urgency, or curiosity to trick you.
+              </p>
+          
+              <p><strong>Common Examples of Social Engineering:</strong></p>
+              <ul>
+                <li><strong>Phishing emails:</strong> Fake emails that look like 
+                    they’re from a real company asking you to “confirm” your account 
+                    details.</li>
+                <li><strong>Pretexting:</strong> When someone creates a fake story 
+                    (or “pretext”) to get you to share information — for example, 
+                    pretending to be IT support asking for your login to “fix an issue.”</li>
+                <li><strong>Baiting:</strong> Offering something tempting, like a free 
+                    download or USB drive, that actually contains malware.</li>
+                <li><strong>Tailgating (or Piggybacking):</strong> Physically following 
+                    someone into a secure building by pretending to be an employee 
+                    who forgot their badge.</li>
+                <li><strong>Vishing (Voice Phishing):</strong> Phone calls from scammers 
+                    pretending to be from your bank or a government agency, trying to 
+                    make you give personal information.</li>
+              </ul>
+          
+              <p><strong>How to Recognize a Social Engineering Attack:</strong></p>
+              <ul>
+                <li><strong>Unusual requests:</strong> Someone asks for sensitive 
+                    information (like passwords or account details) that they normally 
+                    wouldn’t need.</li>
+                <li><strong>Pressure to act quickly:</strong> The attacker tries to 
+                    rush you, saying things like “Your account will be closed today 
+                    if you don’t act now.”</li>
+                <li><strong>Impersonation of authority figures:</strong> They may 
+                    pretend to be a boss, police officer, or bank representative to 
+                    gain your trust.</li>
+                <li><strong>Too good to be true offers:</strong> Promises of free 
+                    money, prizes, or gifts are usually scams.</li>
+                <li><strong>Requests to keep it secret:</strong> If someone tells you 
+                    “Don’t tell anyone about this,” it’s a red flag.</li>
+              </ul>
+          
+              <p><strong>How to Protect Yourself from Social Engineering:</strong></p>
+              <ul>
+                <li><strong>Be skeptical of unsolicited requests:</strong> If someone 
+                    contacts you out of the blue asking for private details, don’t 
+                    trust it right away.</li>
+                <li><strong>Verify identities:</strong> Call the company or person 
+                    directly using a phone number or website you know is real — 
+                    not the one given in the suspicious message.</li>
+                <li><strong>Never share sensitive info without confirmation:</strong> 
+                    Don’t give out passwords, PINs, or financial details unless you 
+                    are 100% sure the request is genuine.</li>
+                <li><strong>Take your time:</strong> Don’t let anyone rush you. 
+                    Scammers want you to act before thinking carefully.</li>
+                <li><strong>Educate yourself and others:</strong> The more you know 
+                    about social engineering tactics, the less likely you are to fall 
+                    for them.</li>
+              </ul>
+          
+              <p>
+                Remember: Social engineering attacks target <em>people</em>, not just 
+                computers. Stay alert, trust your instincts, and always double-check 
+                before sharing personal information.
+              </p>
+          
+              <div class="gif-placeholder">
+                <img src="static/images/socialengineering.gif" alt="Social Engineering GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHRvbmJnN2gzOXN4YWk5b3Y2ZHc4dDM3dXh6dXBtNXFmdThtMXoxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YQitE4YNQNahy/giphy.gif
+                -->
+              </div>
+            </div>
+          </div>
+          
+        <!-- Wifi Risks -->
+        <div class="feature-item">
+            <div class="feature-header">
+              <img src="static/images/wifi-library.png" alt="Wi-Fi Risks" class="topic-img" />
+              <span class="feature-title">Wi-Fi Risks</span>
+              <span class="feature-arrow">&#x25BC;</span>
+            </div>
+            <div class="feature-content">
+              <p><strong>What are Wi-Fi Risks?</strong></p>
+              <p>
+                Using public or unsecured Wi-Fi networks (like the free Wi-Fi in 
+                airports, cafes, hotels, or shopping malls) can put your personal 
+                information at risk. These networks are often open for anyone to join, 
+                which means attackers can secretly watch what you’re doing online.  
+              </p>
+              <p>
+                Cybercriminals can use these networks to steal your passwords, read 
+                your messages, spy on the websites you visit, or even take control of 
+                your accounts. Because public Wi-Fi doesn’t always use strong 
+                encryption, your data may travel across the network in a way that 
+               ’s easy to intercept.
+              </p>
+          
+              <p><strong>How Attackers Exploit Public Wi-Fi:</strong></p>
+              <ul>
+                <li><strong>Man-in-the-Middle Attacks:</strong> Hackers place 
+                    themselves between you and the internet, secretly copying the 
+                    information you send and receive.</li>
+                <li><strong>Fake Wi-Fi Hotspots:</strong> Attackers create a 
+                    Wi-Fi network with a name that looks legitimate 
+                    (like “Free_Airport_WiFi”) to trick you into connecting.</li>
+                <li><strong>Data Sniffing:</strong> Without proper encryption, 
+                    hackers can monitor your online activity and steal login 
+                    details, credit card numbers, or private messages.</li>
+                <li><strong>Session Hijacking:</strong> Once you log in to a website, 
+                    attackers can hijack your session and access your account as if 
+                    they were you.</li>
+              </ul>
+          
+              <p><strong>How to Recognize Risky Wi-Fi Networks:</strong></p>
+              <ul>
+                <li><strong>No password required:</strong> Networks that don’t ask 
+                    for a password are usually unsafe.</li>
+                <li><strong>Unfamiliar or suspicious names:</strong> Be cautious 
+                    if you see networks with strange or misspelled names 
+                    (e.g., “Sturbucks_FreeWiFi” instead of “Starbucks WiFi”).</li>
+                <li><strong>Security warning messages:</strong> If your device warns 
+                    that the connection isn’t secure, don’t ignore it.</li>
+                <li><strong>Too good to be true:</strong> A network that suddenly 
+                    offers fast, free Wi-Fi everywhere may not be trustworthy.</li>
+              </ul>
+          
+              <p><strong>How to Protect Yourself from Wi-Fi Risks:</strong></p>
+              <ul>
+                <li><strong>Avoid doing sensitive tasks on public Wi-Fi:</strong> 
+                    Don’t log in to your bank, shop online, or access private 
+                    accounts when using open Wi-Fi.</li>
+                <li><strong>Use a VPN (Virtual Private Network):</strong> A VPN 
+                    encrypts your internet connection so hackers can’t easily 
+                    see what you’re doing.</li>
+                <li><strong>Connect only to trusted networks:</strong> Whenever 
+                    possible, use mobile data or secure Wi-Fi you know belongs 
+                    to the place you’re in.</li>
+                <li><strong>Forget networks after use:</strong> Set your device 
+                    so it doesn’t automatically reconnect to Wi-Fi networks 
+                    without your permission.</li>
+                <li><strong>Keep your device updated:</strong> Updates often 
+                    include security fixes that protect you from Wi-Fi attacks.</li>
+                <li><strong>Turn off sharing:</strong> Disable features like 
+                    file sharing, printer sharing, and AirDrop when on public Wi-Fi.</li>
+              </ul>
+          
+              <p>
+                Remember: Free Wi-Fi is convenient, but it comes with risks. Always 
+                think twice before connecting, and use extra protection like a VPN 
+                if you need to use it.
+              </p>
+          
+              <div class="gif-placeholder">
+                <img src="static/images/wifi.gif" alt="WIFI GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZyMGQ5ZXRtMGx6dTFsN2VrdHc4cjJ6N3VwZ3ZyMXF0eW5mbHR1eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MaXOUjkV73aO4/giphy.gif
+                -->
+              </div>
+            </div>
+          </div>
+          
+        <!-- Data Privacy and GDPR -->
+        <div class="feature-item">
+            <div class="feature-header">
+              <img src="static/images/gdpr-library.png" alt="Data Privacy" class="topic-img" />
+              <span class="feature-title">Data Privacy & GDPR</span>
+              <span class="feature-arrow">&#x25BC;</span>
+            </div>
+            <div class="feature-content">
+              <p><strong>What is Data Privacy & GDPR?</strong></p>
+              <p>
+                <strong>Data Privacy</strong> is about protecting your personal information 
+                — things like your name, email address, phone number, home address, 
+                photos, and even your online activity. Protecting your privacy means 
+                making sure your information is not collected, shared, or used without 
+                your knowledge or permission.
+              </p>
+              <p>
+                <strong>GDPR (General Data Protection Regulation)</strong> is a law in the 
+                European Union (EU) designed to give people more control over their personal 
+                data. Even if you don’t live in the EU, many companies around the world 
+                follow GDPR rules, so it can still benefit you. GDPR makes it clear that 
+                <em>your data belongs to you</em>, and you have the right to know how 
+                it’s collected, stored, and used.
+              </p>
+          
+              <p><strong>Why Data Privacy Matters:</strong></p>
+              <ul>
+                <li><strong>Prevents identity theft:</strong> If your private info is stolen, 
+                    criminals could open bank accounts, credit cards, or loans in your name.</li>
+                <li><strong>Protects your money:</strong> Hackers can use stolen data to 
+                    access your bank accounts or shop online without your permission.</li>
+                <li><strong>Keeps your online life private:</strong> Companies and hackers 
+                    shouldn’t be able to track your every move without your consent.</li>
+                <li><strong>Avoids unwanted spam and scams:</strong> Sharing too much 
+                    data can lead to endless spam emails, calls, and targeted scams.</li>
+              </ul>
+          
+              <p><strong>Your Rights Under GDPR:</strong></p>
+              <ul>
+                <li><strong>Right to know:</strong> You can ask companies what data 
+                    they have about you.</li>
+                <li><strong>Right to consent:</strong> Companies must ask for your 
+                    permission before collecting or using your data.</li>
+                <li><strong>Right to access:</strong> You can request a copy of the 
+                    personal data a company has stored about you.</li>
+                <li><strong>Right to delete:</strong> You can ask for your data to 
+                    be erased (“right to be forgotten”).</li>
+                <li><strong>Right to correct:</strong> If your information is wrong, 
+                    you can have it fixed.</li>
+                <li><strong>Right to limit or refuse:</strong> You can say no to 
+                    certain ways companies use your data, like for marketing.</li>
+              </ul>
+          
+              <p><strong>How to Recognize GDPR in Action:</strong></p>
+              <ul>
+                <li><strong>Consent requests:</strong> Websites asking you to accept 
+                    or reject cookies before browsing.</li>
+                <li><strong>Privacy policy updates:</strong> Emails or pop-ups from 
+                    services explaining how your data is handled.</li>
+                <li><strong>Options to manage your data:</strong> Settings in your 
+                    account that let you download, delete, or change your personal 
+                    information.</li>
+              </ul>
+          
+              <p><strong>How to Protect Your Data Privacy:</strong></p>
+              <ul>
+                <li><strong>Read privacy policies:</strong> Before using a website or 
+                    app, check how your data will be collected and used.</li>
+                <li><strong>Use privacy settings:</strong> Adjust the privacy options 
+                    on social media, apps, and devices to control who can see your 
+                    information.</li>
+                <li><strong>Be careful with what you share:</strong> Don’t post 
+                    sensitive details like your address, phone number, or travel plans 
+                    on public platforms.</li>
+                <li><strong>Exercise your rights:</strong> If a company misuses your 
+                    data, request corrections or deletion using your GDPR rights.</li>
+                <li><strong>Use strong security practices:</strong> Protect your 
+                    accounts with strong passwords, two-factor authentication, and 
+                    up-to-date software.</li>
+              </ul>
+          
+              <p>
+                Remember: Your personal data is valuable. Treat it like money — only 
+                share it with trusted companies and always make sure you’re in control 
+                of how it’s used.
+              </p>
+          
+              <img src="static/images/gdpr.gif" alt="GDPR GIF" style="max-width:100%;height:auto;display:block;margin:auto;" />
+                <!-- 
+                    reference: 
+                        - https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDlsc3RoZnduaWxjZmFwdWN0MTE0ZWNrMHJzcDVsbG9nNDJxZHF6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1UUe7nnXyqsAlQ2RA7/giphy.gif
+                        - https://giphy.com/GoodwayGroup
+                -->
+              </div>
+            </div>
+          </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CyberSafe Hub</p>
+    </footer>
+    <script src="static/js/main.js"></script>
+    <script>
+      // Accordion expand/collapse for threat library
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.feature-header').forEach(header => {
+          header.addEventListener('click', function() {
+            const item = this.parentElement;
+            item.classList.toggle('active');
+            // Optionally close others:
+            document.querySelectorAll('.feature-item').forEach(other => {
+              if (other !== item) other.classList.remove('active');
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
