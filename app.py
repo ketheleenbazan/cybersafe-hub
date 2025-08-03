@@ -18,7 +18,9 @@ load_dotenv()
 # setup the flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'  # should come from .env for better security
-app.config['MONGO_URI'] = "mongodb+srv://Cluster53944:UmNxWGZFUHBT@cluster53944.01abcoc.mongodb.net/cybersafehub?retryWrites=true&w=majority&ssl=true"
+# hide API key
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+
 mongo = PyMongo(app)
 
 # setup login manager
