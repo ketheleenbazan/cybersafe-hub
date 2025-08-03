@@ -1,10 +1,10 @@
 # CyberSafe Hub
 
-CyberSafe Hub is an interactive cybersecurity awareness website designed for non-technical users and digital beginners. The platform provides a simple, accessible, and engaging way to learn about online safety through hands-on tools and games.
+Designed to assist digital novices and non-technical users to understand online threats, CyberSafe Hub is an interactive cybersecurity awareness website with a gamified approach to cybersecurity education. It offers practical lessons through hands-on tools and games as well as transformative educational resources, breaking down sophisticated ideas in cybersecurity. The platform particularly targets students and seniors, using engaging approaches to help users understand online safety.
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 View and share the site using **GitHub Pages**:  
 https://ketheleenbazan.github.io/cybersafe-hub/
