@@ -112,6 +112,8 @@ https://cybersafe-hub-762e7d7f2358.herokuapp.com/index.html
 
 1. **Clone or download this repository.**
   ```bash git clone https://github.com/ketheleenbazan/cybersafe-hub.git
+  cd cybersafe-hub
+  ```
 2. **Install required dependencies:**
   ```bash
   pip install -r requirements.txt
