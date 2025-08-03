@@ -6,8 +6,8 @@ Designed to assist digital novices and non-technical users to understand online 
 
 ## Live Demo
 
-View and share the site using **GitHub Pages**:  
-https://ketheleenbazan.github.io/cybersafe-hub/
+View and share the site using **Heroku**:  
+https://cybersafe-hub-762e7d7f2358.herokuapp.com/index.html
 
 ---
 
@@ -53,60 +53,89 @@ https://ketheleenbazan.github.io/cybersafe-hub/
   - Classification ranges from green, yellow, and red, or red as a predefined warning with rationale.
 
 - **Email Breach Checker (Real API Integration!):**  
+  - A responsive algorithm checks and validates email addresses against data breaches to ascertain if it has potentially compromised email databases.
+  - Interoperates with the Have I Been Pwned API.
+
+- Results include:
+  - A tally of breached accounts or databases.
+  - Associated accounts or databases.
+  - Actionable recommendations (e.g., suggest a password change).
+
+- Part of the infrastructure is given with heroku, the backend is hosted securely with heroku, and programmed in flask.
+
   - Enter your email address to check if it has appeared in any known data breaches.
   - Uses a secure Flask backend (deployed on Heroku) to call the Have I Been Pwned API.
   - Real-time, actionable feedback with a list of breached sites if found.
   - **Test the backend directly with Postman:**  
-    - **POST** to `https://cybersafe-hub-762e7d7f2358.herokuapp.com/check_breach`  
+    - **POST** to https://cybersafe-hub-762e7d7f2358.herokuapp.com/breach-checker.html 
     - Body (raw JSON):  
       ```json
-      { "email": "your@email.com" }
+      { "email": "ketheleenbazan@gmail.com" }
       ```
 - **Encrypted Notes Vault:**  
-  - Encrypt and decrypt notes using AES.
-  - Notes are saved locally or optionally in Firebase.
+  - Create personal notes that are stored privately and securely in a digital vault using AES software encoding.
+  - Notes are stored in a database encrypted as ciphertext, and only decrypted with a user’s secret passphrase, ensuring the server remains blind to the contents.
+  - Demonstrated the use of modern encryption techniques in practical scenarios.
 
 - **Cipher Builder:**  
-  - Experiment with ciphers (Caesar, Vigenère).
-  - Encrypt or decrypt text with custom keys.
+  - Hands-on learning with classic encryption:
+  - Caesar Cipher.
+  - Vigenère Cipher.
+  - Applying personal secret codes, users can encrypt and decrypt text.
+  - Learn cryptography through active engagement with key principles.
 
 - **Threat Library:**  
-  - Browse topics like ransomware, phishing, social engineering, Wi-Fi risks, GDPR, and more.
-  - Content includes images, text, videos, and links.
+  - Guides Focused On Risk Categories Above:
+    - Phishing
+    - Ransomware
+    - Malware
+    - Social Engineering
+    - Risks In Wi-Fi
+    - Privacy & Data Protection Information Focused On GDPR
+  - Each entry features clarifying definitions, case studies, visuals, preventative measures, and more.
+  - Great for peer educators and community educators.
+
+---
+
+## Tech Stack
+
+  - Frontend: HTML5, CSS3 (custom palette: navy, teal, green, yellow, red, white), JavaScript.
+  - Backend: Python Flask (for login, notes, breach checker).
+  - Database: MongoDB Atlas (secure cloud storage).
+  - Encryption: AES (CryptoJS), Stegano & PIL for steganography.
+  - Deployment: GitHub Pages (frontend), Heroku (backend).
+  - APIs: Have I Been Pwned.
 
 ---
 
 ## Getting Started
 
 1. **Clone or download this repository.**
-2. **Open `index.html` in your web browser** to use locally.
-3. **Or deploy to GitHub Pages** for a live, shareable version (see below).
+  ```bash git clone https://github.com/ketheleenbazan/cybersafe-hub.git
+2. **Install required dependencies:**
+  ```bash
+  pip install -r requirements.txt
+  ```
+3. **Run the Flask app:**
+  ```bash
+  python app.py
+  ```
+4. **Access the app at `http://localhost:8000` in your browser.**
 
 ---
 
-## Deploying to GitHub Pages
+## Deploying to Heroku and GitHub repo
 
-1. **Create a GitHub repository** and push your project files.
-2. Go to your repo’s **Settings > Pages**.
-3. Under **Source**, select the `main` branch and `/ (root)` folder.
-4. Click **Save** and wait for your site link to appear.
+- Heroku 
+  - Push your project to Heroku using Git.
+  - Heroku hosts both the frontend and backend, ensuring smooth integration of Flask services and the static frontend pages.
+  - GitHub is used as a repository to manage and store the project files, not for serving the live app.
 
 ---
 
 ## Navigation
-
 - The top navigation bar provides links to all sections of the site.
 - On smaller screens, a simple breadcrumb shows your current location.
-
----
-
-## Tech Stack
-
-- HTML
-- CSS (custom palette: navy, teal, green, yellow, red, white)
-- JavaScript
-- Python (Flask backend for breach checker)
-- Heroku (backend deployment)
 
 ---
 
@@ -117,14 +146,20 @@ https://ketheleenbazan.github.io/cybersafe-hub/
 - Responsive and mobile-friendly layout.
 - High-contrast colors and readable fonts for accessibility.
 - Footer remains at the bottom of every page.
+- Keyboard navigation for all features.
 
 ---
 
 ## Project Goals
 
-- Empower everyday users to recognize and avoid common cyber threats.
-- Make cybersecurity education approachable, practical, and fun.
-- Provide a resource suitable for schools, libraries, community centers, and home use.
+  - Equip the users with knowledge and skills to identify and evade basic cyber threats.
+  - Present cybersecurity concepts in concise and captivating ways.
+- offer and grant access to the resource with no restrictions to:
+    - Educational institutions
+    - Public or community libraries
+    - Community resource centers
+    - Parents and families.
+    - Foster stronger hygiene practices for users. 
 
 ---
 
@@ -133,5 +168,7 @@ https://ketheleenbazan.github.io/cybersafe-hub/
 This project is open source and free to use for educational purposes.
 
 ---
+## Motivation ❤️
 
-*Created as part of a digital literacy and cybersecurity education initiative.*
+This project is dedicated to my grandparents, who often struggled with phishing emails, scams, and confusing security warnings. I wanted to create a safe, approachable space where people like them — and all digital beginners — can learn how to stay secure online with confidence.
+
